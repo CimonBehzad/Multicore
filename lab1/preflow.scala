@@ -22,7 +22,7 @@ case class GetHeight(ret: ActorRef)
   * @param amount
   * @param myHeight
   */
-case class TryPush(amount: Int, myHeight: Int)
+case class TryPush(amount: Int, myHeight: Int, source: ActorRef)
 
 /** Unconditionally pushes amount to neighbor
   *
@@ -76,6 +76,11 @@ class Node(val index: Int) extends Actor {
         exit("relabel")
     }
 
+    def work() = {
+        // Try to empty out excess
+
+    }
+
     def receive = {
 
         case Debug(debug: Boolean) => this.debug = debug
@@ -95,17 +100,30 @@ class Node(val index: Int) extends Actor {
         case Control(control: ActorRef) => this.control = control
 
         case Sink => { sink = true }
+        case Push(c) => {
+            e += c
+        }
+        case TryPush(amount: Int, myHeight: Int) => {
+
+            enter("TryPush")
+
+            if (h < myHeight) {
+                // Push back
+            } else {
+                // Update edge and excess
+            }
+
+            exit("TryPush")
+        }
 
         case Source(n: Int) => {
             h = n;
             source = true
             for (a <- edges) {
-
                 val v = other(a, self)
                 a.f = df
                 e -= df
                 v ! Push(df)
-
             }
 
         }
