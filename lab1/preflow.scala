@@ -10,6 +10,7 @@ import scala.language.postfixOps
 import scala.io._
 
 case class Flow(f: Int)
+case class Push(f: Int)
 case class Debug(debug: Boolean)
 case class Control(control: ActorRef)
 case class Source(n: Int)
@@ -67,9 +68,7 @@ class Node(val index: Int) extends Actor {
         case Print => status
 
         case Excess => {
-            sender ! Flow(
-              e
-            ) /* send our current excess preflow to actor that asked for it. */
+            sender ! Flow(e) /* send our current excess preflow to actor that asked for it. */
         }
 
         case edge: Edge => {
@@ -81,7 +80,13 @@ class Node(val index: Int) extends Actor {
 
         case Sink => { sink = true }
 
-        case Source(n: Int) => { h = n; source = true }
+        case Source(n: Int) => 
+            { h = n;
+            source = true; 
+            for (e <- edge){
+                e.v ! flow(e.c)
+            }
+            }
 
         case _ =>
             {
@@ -116,6 +121,7 @@ class Preflow extends Actor {
 
         case Flow(f: Int) => {
             ret ! f /* somebody (hopefully the sink) told us its current excess preflow. */
+
         }
 
         case Maxflow => {
@@ -156,6 +162,7 @@ object main extends App {
 
     edge = new Array[Edge](m)
 
+
     for (i <- 0 to m - 1) {
 
         val u = s.nextInt
@@ -167,6 +174,9 @@ object main extends App {
         node(u) ! edge(i)
         node(v) ! edge(i)
     }
+
+    node(0) ! Source(n)
+    node.last ! Sink
 
     control ! node
     control ! edge

@@ -32,3 +32,4 @@
 **/.bloop
 **/.metals
 lab1/sbt-dist/bin
+lab1/all-output
