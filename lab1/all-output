@@ -5,67 +5,11 @@ copying runtime jar...
 [info] loading settings for project lab1-build from metals.sbt ...
 [info] loading project definition from /home/cimon/Documents/år5/MultiEDAN26/Multicore/labs/lab1/project
 [success] Generated .bloop/lab1-build.json
-[success] Total time: 1 s, completed Sep 5, 2025, 11:36:01 AM
+[success] Total time: 1 s, completed Sep 5, 2025, 1:20:47 PM
 [info] loading settings for project lab1 from build.sbt ...
 [info] Compiling 1 Scala source to /home/cimon/Documents/år5/MultiEDAN26/Multicore/labs/lab1/target/scala-2.13/classes ...
-[info] Done compiling.
-[info] running main 
-11:36:05.214 [Main-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-[error] (run-main-0) java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 3
-Node$$anonfun$receive$1$$Lambda$6018/0x000076c6c928b9b8@31d7c843
-[error] java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 3
-[error] 	at main$.delayedEndpoint$main$1(preflow.scala:158)
-[error] 	at main$delayedInit$body.apply(preflow.scala:129)
-[error] 	at scala.Function0.apply$mcV$sp(Function0.scala:39)
-[error] 	at scala.Function0.apply$mcV$sp$(Function0.scala:39)
-[error] 	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:17)
-[error] 	at scala.App.$anonfun$main$1(App.scala:73)
-[error] 	at scala.App.$anonfun$main$1$adapted(App.scala:73)
-[error] 	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:553)
-[error] 	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:551)
-[error] 	at scala.collection.AbstractIterable.foreach(Iterable.scala:921)
-[error] 	at scala.App.main(App.scala:73)
-[error] 	at scala.App.main$(App.scala:71)
-[error] 	at main$.main(preflow.scala:129)
-[error] 	at main.main(preflow.scala)
-[error] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-[error] 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-[error] 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-[error] 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-[error] stack trace is suppressed; run 'last Compile / bgRun' for the full output
-11:36:05.265 [Main-akka.actor.default-dispatcher-6] ERROR akka.actor.LocalActorRefProvider - guardian failed, shutting down system
-java.lang.AssertionError: assertion failed
-	at scala.Predef$.assert(Predef.scala:267)
-	at Node$$anonfun$receive$1.applyOrElse(preflow.scala:89)
-	at akka.actor.Actor.aroundReceive(Actor.scala:537)
-	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
-	at Node.aroundReceive(preflow.scala:28)
-	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:579)
-	at akka.actor.ActorCell.invoke(ActorCell.scala:547)
-	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
-	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
-	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
-	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373)
-	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182)
-	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655)
-	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622)
-	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165)
-11:36:05.266 [Main-akka.actor.default-dispatcher-6] ERROR akka.actor.OneForOneStrategy - assertion failed
-java.lang.AssertionError: assertion failed
-	at scala.Predef$.assert(Predef.scala:267)
-	at Node$$anonfun$receive$1.applyOrElse(preflow.scala:89)
-	at akka.actor.Actor.aroundReceive(Actor.scala:537)
-	at akka.actor.Actor.aroundReceive$(Actor.scala:535)
-	at Node.aroundReceive(preflow.scala:28)
-	at akka.actor.ActorCell.receiveMessage(ActorCell.scala:579)
-	at akka.actor.ActorCell.invoke(ActorCell.scala:547)
-	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:270)
-	at akka.dispatch.Mailbox.run(Mailbox.scala:231)
-	at akka.dispatch.Mailbox.exec(Mailbox.scala:243)
-	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373)
-	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182)
-	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655)
-	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622)
-	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165)
-[error] Nonzero exit code: 1
-[error] (Compile / run) Nonzero exit code: 1
+[error] /home/cimon/Documents/år5/MultiEDAN26/Multicore/labs/lab1/preflow.scala:156:9: Missing closing brace `}` assumed here
+[error]         case Source(n: Int) => {
+[error]         ^
+[error] one error found
+[error] (Compile / compileIncremental) Compilation failed

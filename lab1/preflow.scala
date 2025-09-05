@@ -14,8 +14,9 @@ case class Push(f: Int)
 case class Debug(debug: Boolean)
 case class Control(control: ActorRef)
 case class Source(n: Int)
-
 case class GetHeight(ret: ActorRef)
+case class IncreaseActive()
+case class DecreaseActive()
 
 /** Tries to push amount to neighbor Neighbor check if this.height < myHeight,
   * if so updates excess and edges else pushes back with Push
@@ -51,8 +52,7 @@ class Node(val index: Int) extends Actor {
     var sink: Boolean = false /* true if we are the sink.					*/
     var edges: List[Edge] =
         Nil /* adjacency list with edges objects shared with other nodes.	*/
-    var debug = true /* to enable printing.	
-    					*/
+    var debug = true /* to enable printing.	*/
     var nextEdge = 0;
 
     def min(a: Int, b: Int): Int = { if (a < b) a else b }
@@ -79,27 +79,36 @@ class Node(val index: Int) extends Actor {
         exit("relabel")
     }
 
-    def work() = {
-        while(e != 0){
+    def work: Unit = {
 
-            val edge = edges(nextEdge);
-            nextEdge +=1
-            if (nextEdge >= edges.length){
-                nextEdge = 0;
-            }
-            var pushCapacity = 0;
-            if(e.u == self){
-                pushCapacity = edge.c - edge.f
-            }
-            else{
-                pushCapacity = edge.f
-            }
-            val delta = min(e, pushCapacity)
-           
-            e ! TryPush(delta,h,edge)
-            e -= delta
+
+        if(e == 0){
+            return
+
         }
 
+        val edge = edges(nextEdge);
+        nextEdge +=1
+        if (nextEdge >= edges.length){ // We have tried to push to everyone but no one worked, we need to raise
+            nextEdge = 0;
+            relabel
+        }
+        var pushCapacity = 0;
+        if(edge.u == self){
+            pushCapacity = edge.c - edge.f
+        }
+        else{
+            pushCapacity = edge.f
+        }
+        if(pushCapacity==0){
+            work // We can not push on this edge, go to next
+            return;
+        }
+        val delta = min(e, pushCapacity)
+        
+        other(edge, self) ! TryPush(delta,h,edge)
+        e -= delta
+        
 
 
     }
@@ -125,32 +134,28 @@ class Node(val index: Int) extends Actor {
         case Sink => { sink = true }
         
         case PushBack(c) => {
-            e += c
-            if(c == 0){
-                // ACK
-            }
-            else{
-                //NACK
-                relabel()
-            }
-            work()
+            e -= c
+            work
+            control ! DecreaseActive
         }
         
         case TryPush(amount: Int, myHeight: Int, edge: Edge) => {
             enter("TryPush")
+            control ! IncreaseActive
 
             if (h < myHeight) {
                 other(edge,self) ! PushBack(amount)
             } else {
                 e+=amount;
                 edge.f+= amount;
-                work()
+                work
             }
 
+            
             exit("TryPush")
         }
 
-        case PushBack(amount: Int) => {
+
      
 
         case Source(n: Int) => {
@@ -181,7 +186,10 @@ class Preflow extends Actor {
     var n = 0; /* number of vertices in the graph.				*/
     var edges: Array[Edge] = null /* edges in the graph.						*/
     var node: Array[ActorRef] = null /* vertices in the graph.					*/
-    var ret: ActorRef = null /* Actor to send result to.					*/
+    var ret: ActorRef = null /* Actor to send result to.		
+    
+    			*/
+    var active = 0;
 
     def receive = {
 
@@ -197,6 +205,7 @@ class Preflow extends Actor {
         case edges: Array[Edge] => this.edges = edges
 
         case Flow(f: Int) => {
+            
             ret ! f /* somebody (hopefully the sink) told us its current excess preflow. */
 
         }
@@ -208,6 +217,23 @@ class Preflow extends Actor {
               t
             ) ! Excess /* ask sink for its excess preflow (which certainly still is zero). */
         }
+
+        case IncreaseActive => {
+            active+=1
+
+        }
+
+        case DecreaseActive => {
+            active -=1
+        }
+
+        case CheckActive => {
+            if(active == 0){
+                //Done
+            }
+        }
+
+        
     }
 }
 
@@ -237,7 +263,7 @@ object main extends App {
     for (i <- 0 to n - 1)
         node(i) = system.actorOf(Props(new Node(i)), name = "v" + i)
 
-    edge = new Array[Edge](m)
+    edges = new Array[Edge](m)
 
     for (i <- 0 to m - 1) {
 
