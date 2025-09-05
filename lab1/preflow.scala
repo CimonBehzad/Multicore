@@ -51,7 +51,9 @@ class Node(val index: Int) extends Actor {
     var sink: Boolean = false /* true if we are the sink.					*/
     var edges: List[Edge] =
         Nil /* adjacency list with edges objects shared with other nodes.	*/
-    var debug = true /* to enable printing.						*/
+    var debug = true /* to enable printing.	
+    					*/
+    var nextEdge = 0;
 
     def min(a: Int, b: Int): Int = { if (a < b) a else b }
 
@@ -78,7 +80,27 @@ class Node(val index: Int) extends Actor {
     }
 
     def work() = {
-        // Try to empty out excess
+        while(e != 0){
+
+            val edge = edges(nextEdge);
+            nextEdge +=1
+            if (nextEdge >= edges.length){
+                nextEdge = 0;
+            }
+            var pushCapacity = 0;
+            if(e.u == self){
+                pushCapacity = edge.c - edge.f
+            }
+            else{
+                pushCapacity = edge.f
+            }
+            val delta = min(e, pushCapacity)
+           
+            e ! TryPush(delta,h,edge)
+            e -= delta
+        }
+
+
 
     }
 
@@ -104,6 +126,14 @@ class Node(val index: Int) extends Actor {
         
         case PushBack(c) => {
             e += c
+            if(c == 0){
+                // ACK
+            }
+            else{
+                //NACK
+                relabel()
+            }
+            work()
         }
         
         case TryPush(amount: Int, myHeight: Int, edge: Edge) => {
