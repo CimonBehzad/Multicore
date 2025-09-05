@@ -107,7 +107,6 @@ class Node(val index: Int) extends Actor {
         val delta = min(e, pushCapacity)
         
         other(edge, self) ! TryPush(delta,h,edge)
-        e -= delta
         
 
 
