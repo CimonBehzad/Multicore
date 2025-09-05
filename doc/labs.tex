@@ -1,0 +1,1044 @@
+\documentclass{forsete}
+
+\usepackage[charter]{mathdesign}
+\usepackage{bera}
+
+\author{student1 and student2\\Lund University}
+\title{Course report on parallel preflow-push\\{\normalsize Labs in EDAN26 Multicore programming}}
+\newpage
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Performance results}
+\begin{center}
+\begin{tabular}{|c|l|l|r|l|}
+\hline
+Lab & Language* & Synchronization & Time / s & Note \hspace{21mm} \ \\
+\hline
+1 & Akka & actors & & \\
+\hline
+2 & Java & locks & & \\
+\hline
+2 & C & locks & & \\
+\hline
+3 & C & barriers & & \\
+\hline
+4 & C & atomic & & \\
+\hline
+5 & Rust & locks & & \\
+\hline
+6 & C & TM & & \\
+\hline
+6 & Clojure & TM & & \\
+\hline
+  & & & & \\
+\hline
+  & & & & \\
+\hline
+  & & & & \\
+\hline
+  & & & & \\
+\hline
+\end{tabular}
+\end{center}
+\noindent * C is required in Lab~2, and recommended in labs 3, 4 and 6. See Section~\ref{lang.sec}. 
+
+\section{Competition rules}
+This is a tentative list of rules for the competition.
+\begin{enumerate}
+\item The deadline for the competition is Sunday November 3, at 18:00:00.
+
+\item Only programs based on the preflow push algorithm are permitted.
+
+\item If you would violate any constraints in the algorithm, you must prove that it is correct to do so and
+not just happens to work on the test cases. An example of a violated constraint would be to allow the height 
+of a node to have any value (which would not be permitted since the algorithm will not work then).
+
+\item It is obviously permitted to be inspired by published articles.
+
+\item It must be written in ISO C plus Pthreads, meaning no GNU extensions and no machine code, except that it is permitted to use
+hardware transactional memory as in Lab 6 (despite not being ISO C).
+\item No data-races are permitted.
+
+\end{enumerate}
+\section{More theory about preflow-push}
+The preflow-push algorithm is almost always presented with a while loop that iterates until no node (except the sink) has a positive excess preflow. We used the same in EDAF05.
+
+Nils Ceberg made the following nice observation, that instead of finding out when only the sink has a 
+positive preflow, it is sufficient to check 
+if the  flow out from the source is equal to the flow in to the sink. This check can be done
+{\em after} the source has done its initial pushes to its neighbors. This works
+since after the initial pushes the flow out from the source decreases monotonically, and the flow in
+to the sink always increases monotonically (since it keeps all flow it gets and never pushes it away).
+Another way to see this, is that the flow out from the source must be 
+equal to the sum $S$ of all excess preflows for all nodes except the source, so when the flow out from the source
+is equal to the flow in to the sink, only the sink contributes to $S$ so the excess preflow of all other nodes
+must be zero, at which point the algorithm should terminate, just as with the while-loop condition.
+
+Using this still gives an interesting learning experience in Lab 1, but it will be much simpler than using a
+controller to check for the termination by counting active nodes. There can be some non-obvious rare races between messages if 
+the controller {\em only} uses a counter.
+
+\section{How to do the labs}
+\begin{itemize}
+\item To make lab presentation more efficient, you must have a Discord username that shows your real name (but to ask questions, you can use any username).
+\item Except for Lab 6, you can do the labs on Mac, Linux, or Windows with the Linux subsystem, but they
+should be presented power8.cs.lth.se, below called Power.
+\item Some functionality will only work on Power.
+\item First download the Tresorit directory you got an email about, or copy the directory /opt/tresorit/edan26/labs Power to your account 
+there (or with scp to any computer).
+\item Check out the sequential C program preflow.c in lab0 and the pseudo code in preflow.pdf in Tresorit and
+make sure you understand it. If not, ask at Discord or book a Zoom meeting with Jonas. Zoom is booked 
+at \verb!calendly.com/forsete!
+\item Then read the language and general requirements below and the specific requirements and questions for a lab. Each
+lab has hints at the end of this pdf which you might want to check out.
+\item No report should be written except that you should fill in the performance numbers at the first page (with suitable notes for yourself 
+only to keep track of your best solution so far). Edit labs.tex from Tresorit in the labs/doc directory (which has two support files).
+\end{itemize}
+\section{\label{lang.sec}Language requirements}
+It is required to have parallelized preflow push in Scala/Akka (lab~1), Java, C (lab~2), Rust (lab~5) 
+and Clojure (lab~6). In labs 3, 4, and 6 you can use any language with support for 
+automatic data-race detection (such as C and C++), and:
+\begin{itemize}
+\item Lab~3: barriers (or implement your own barrier)
+\item Lab~4: atomic variables 
+\item Lab~6: hardware transactional memory
+\end{itemize}
+C is a safe choice :)
+\section{Debugging and help from teachers}
+As a general rule, it is {\em not} expected that teachers will debug your code, partly because it can be 
+too time-consuming and partly because it is an essential skill to develop. If there is sufficient time on a lab session, of course you can ask the teachers for debugging help. It is likely you will find C with the
+Google sanitizer plus printing lots of output the most efficient, plus using gdb if your program crashes (see the
+course book).
+Instead we are happy to look for ''common mistakes'' and give general hints on debugging parallel preflow push in 
+Scala/Akka, Java, C, Rust and Clojure. If you need help to move forward, you can always book a Zoom meeting with Jonas (see above).
+
+It can also be a good idea to write a question in a text-channel (lab or language specific) plus answering 
+other questions! Feel free to suggest additional language-specific channels.
+
+\section{Lab requirements and questions}
+The teachers will ask you questions including these but it is not required to write the answers in the pdf.
+
+\subsection*{General requirements}
+\begin{enumerate}
+\item Which lab solutions should be uploaded to Forsete (and which URL) will be decided later but at least the
+C labs should be uploaded.
+\item You should present the labs in Discord (with a username that shows your real name to make presentation more efficient) and be logged in to the Power machine (see email or tresorit).
+\item When you type the command \verb.make. on Power, you should get output \verb.PASS. and the execution time.
+Sometimes you need to type e.g. \verb.make par. or modify the \verb.makefile..
+\item Fill in the table above with the {\em fastest} execution time of a few runs (fastest since then your program was not so much disturbed by other things --- but in other situations it can be more relevant to measure 
+average or slowest).
+\item All source code should be written by yourself or your lab partner, in which case you should understand 
+it as if you had written it yourself.
+\item No data-races or potential deadlocks are permitted, as reported by Google sanitizer or Helgrind (use smaller inputs for Helgrind).
+
+\item You are allowed to use any library functions available in the language you use except if there is one for maxflow.
+
+\item In the C/Pthreads labs, it is only in the lab on transactional memory that you may use non-standard extensions of ISO C, as shown in the hint.
+\item You are not allowed to use timeouts (or ''periodic checks'') to decide when your program ''probably'' has completed.
+\item For the competition: you can use any algorithm for maxflow, as long as you have written it yourself. Feel free
+to get ideas from the research literature. It can be useful to select alternatives in the program based on values from the input, but that is
+not permitted, except that you may select what to do based on the number of nodes and edges.
+It is also permitted to
+determine general characteristics about the input such the length of a shortest path from source to sink (if that would
+be relevant), or similar, but it is not permitted to check e.g. if there is an edge between nodes 
+$v_{124}$ and $v_{129}$ and then select  an alternative optimized for that input.
+
+\end{enumerate}
+
+\newpage
+\subsection*{Lab 1: Scala/Akka}
+\subsubsection*{Purposes}
+You will learn about:
+\begin{itemize}
+\item What actors are and how they communicate
+\item Guarantees about the order in which messages arrive
+\item How to know when an Akka program has completed (one example)
+\end{itemize}
+{\em Important: Due to changes in either Scala/Akka or Java or both, you need to use openjdk-17 to run the Java byte code created by the Scala compiler.
+On {\tt power8.cs.lth.se } this can be done by setting your {\tt PATH} environment variable to have the
+directory: 
+
+{\tt /usr/lib/jvm/java-17-openjdk-ppc64el/bin/java}
+
+\noindent before 
+
+{\tt /usr/bin}
+
+\subsubsection*{Relevant sections in the book}
+See lecture 2, since the book does not cover Scala/Akka but if you are new to terminals, Appendix A will be useful (you can find it in Tresorit as well).
+\subsubsection*{Requirements}
+\begin{enumerate}
+\item Each node must be one actor.
+\item You are only allowed to share an edge object between two nodes but no other information (such as storing their
+heights somewhere easily accessible from any node or from a neighbor).
+\item The only way to get information from another actor is to ask for it using a message and no shared data is allowed (except edges).
+\item It is not permitted to use ? between nodes but if needed with a controller for 
+''critical messages''.
+
+The reason is that the default way of thinking with actors should be ''send a message and wait for any message'', i.e. with !
+
+(Motivation: without forbidding ? between nodes, it is ''too easy'' to use messages as normal method/function calls (but that limits concurrency normally).
+If you think of a chat server when it sends a text to many phones, it would be too slow to send one at a time with ?
+)
+
+\item If you use a controller, it is not permitted to let it periodically wake up nodes. Instead it should either keep 
+track of which node is active, or solve it in some other way.
+\end{enumerate}
+
+\subsubsection*{Note}
+\begin{enumerate}
+\item There is no performance requirement for Scala/Akka.
+\end{enumerate}
+
+\subsubsection*{Questions}
+\begin{enumerate}
+\item If you use a controller, how can it know that no node is active? If you don't use a controller for that, how do the actors agree on
+terminating the algorithm?
+\item How many push messages can a node have in progress concurrently in your solution? (one is OK)
+\item How do you ensure that a node never gets a negative excess preflow? (except possibly for the source depending on how you implement it)
+\item With millions of nodes in a graph, it would be bad to have one JVM thread per actor, so how is it done?
+\item Explain your source code.
+\item Did you find a way to improve the performance of your program over the first correct version?
+\item For which types of applications would you consider using Akka and why?
+\end{enumerate}
+
+\subsubsection*{Getting started on Power}
+If you have a working \verb!preflow.scala!, then the following commands can be used to run it on the Power.
+\begin{verbatim}
+scp preflow.scala stilid@power8.cs.lth.se:
+ssh stilid@power8.cs.lth.se
+cp -r /opt/tresorit/edan26/labs .
+mv preflow.scala labs/lab1
+cd labs/lab1
+make
+\end{verbatim}
+
+See also appendix-A.pdf and \verb!ssh-copy-id! for how to avoid typing your password too many times. Specifically, it creates a file on your local computer and copies it e.g. to Power so when you want to login to Power, no password is needed. The appendix is from the course book and can be found in Tresorit.
+
+
+\newpage
+\subsection*{Lab 2: Java and C with locks}
+\subsubsection*{Purposes}
+You will learn about:
+\begin{itemize}
+\item How to avoid deadlocks in multithreaded programs
+\item How to detect data-races in C automatically
+\item How to detect risks for deadlocks in C automatically
+\item The importance of a load-balancing
+\item The importance of a suitable task granularity
+that
+matches the structure of the program in order to reduce most of the overhead from
+thread synchronization.
+Recall that a task is  the job performed as a ''work-item''
+by a thread such as what is done with one node with excess preflow.
+\end{itemize}
+
+\subsubsection*{Relevant sections in the book}
+Chapter 18 and sections 6.5 and 6.9.1 if your C program crashes.
+\subsubsection*{Requirements}
+\begin{enumerate}
+\item Parallelize preflow-push both in Java and C with locks and possibly with
+condition variables (see hints about which language may be preferable to do first).
+
+\item The concurrency must scale with the number of nodes and threads so you cannot use for instance
+only one lock for the whole program. Use for example one lock per node.
+
+\item Check your C program both with
+the Google Thread Sanitizer (often called tsan) and Helgrind. 
+
+\item Print out a message when each thread terminates.
+
+\item What fraction of the execution time is wasted on synchronization?
+
+To measure this, you can use the \verb.operf. and \verb.opreport. commands. See the course book or
+\verb!operf.pdf! in Tresorit. On Power you can do:
+\begin{ccode}
+gcc -g -O3 -pthread preflow.c
+operf ./a.out
+opreport -t 1 -l a.out
+\end{ccode}
+
+\item Collect and present statistics about load-balancing, such as
+for instance how many nodes each thread has processed.
+\end{enumerate}
+
+\subsubsection*{Optional}
+On the Power computer, you can make very accurate timing-measurements using the so called Timebase Register, 
+which is incremented regularly (not every clock cycle to avoid overflow but very often).
+It is not compulsory for the labs to use it, but if you want to, do \verb!#include "timebase.h"! and in \verb.main. use: 
+\begin{ccode}
+	double		begin;
+	double		end;
+
+        init_timebase();
+\end{ccode}
+And measure time as:
+\begin{ccode}
+	begin = timebase_sec();
+        f = preflow();
+        end = timebase_sec();
+
+        printf("t = %lf s\n", end-begin);
+\end{ccode}
+You may want to modify the \verb.makefile. to:
+\begin{ccode}
+gcc -g -O3 -pthread preflow.c tbr.s timebase.c
+\end{ccode}
+Or copy \verb!/opt/tresorit/preflow/labs/lab2/c/makefile! on Power.
+
+\subsubsection*{Questions}
+\begin{enumerate}
+\item How do you avoid data-races and deadlocks? 
+\item What is your approach to load-balancing and how does it succeed?
+\item Is your parallel program faster than the sequential from Lab 0, and
+what do you think is the reason for this?
+\item Did you notice any big performance difference between Java and C? (in principle, either can be fastest and 
+the JVM and the optimizing compiler are important factors, and how you use the languages).
+\item Explain your source codes.
+\item Did you find a way to improve the performance of your programs over the first correct version?
+
+\end{enumerate}
+
+\newpage
+\subsection*{Lab 3: Barriers}
+\subsubsection*{Purposes}
+You will learn about:
+\begin{itemize}
+\item How running threads in phases sometimes can reduce synchronization overhead and increase performance.
+\item How to use barriers.
+\end{itemize}
+
+\subsubsection*{Relevant sections in the book}
+The same as for Lab 2.
+\subsubsection*{Requirements}
+\begin{enumerate}
+\item Either (1) modify your C program from Lab~2, or (2) use any other language of your choice that
+supports data-race detection, so that the threads run in two phases:
+\begin{itemize}
+\item a first phase to let each thread decide on how much its nodes should push to a neighbor (or that a relabel is needed), and
+\item a second phase with only one thread doing work to update the excess preflows and heights
+\end{itemize}
+\item Check your program for data-races as in Lab~2.
+
+\item What fraction of the execution time is wasted on synchronization?
+
+\item Collect and present statistics about load-balancing.
+\item Your program should now be faster than the sequential from Lab 0, which gets a score of $35$ at
+Forsete.
+
+\end{enumerate}
+
+\subsubsection*{Questions}
+\begin{enumerate}
+\item Does the use of phases affect the possibility to do good load-balancing, and why, and if it does, to 
+what extent is it significant?
+\item Explain your source code.
+\item Can you distribute the nodes in a fair way for load-balance?
+\item Did you find a way to improve the performance of your program over the first correct version?
+
+\end{enumerate}
+
+\newpage
+\subsection*{Lab 4: Atomic variables}
+\subsubsection*{Purposes}
+You will learn about
+\begin{itemize}
+\item The overhead of using atomic variables over non-atomic variables.
+\item When this overhead may save time from other parts of a program.
+\end{itemize}
+
+\subsubsection*{Relevant sections in the book}
+Chapter 5, sections 7.18, and 13.16.
+\subsubsection*{Requirements}
+\begin{enumerate}
+\item Make a copy of the sequential C program from Lab 0 and change the
+type from \verb.int. to \verb.atomic_int. for each variable in the 
+\verb.node_t. and \verb.edge_t. types., and start the file with \verb!#include <stdatomic.h>!
+\item Measure how this affects the execution time (without adding any threads).
+\item Find an explanation for why or why not this affects the execution time by looking at the 
+assembler code. See hint for this lab. 
+
+\item Modify your program from Lab~3 (or Lab~2 if the language used in Lab~3 has no support for atomic variables)
+so that it uses both barriers and atomic variables. It is not sufficient to just change all
+\verb.int.s to \verb.atomic_int.s. You need to somehow exploit the atomic variables. One option is
+to accumulate incoming pushes in a new, atomic, variable in phase 1, and then add that to the
+excess preflow in phase 2, but there are more alternatives.
+\item Your program should still be faster than the sequential from Lab 0.
+
+\item Test your program both with sequential consistency and relaxed memory order. Depending on how
+how complex context you use atomic variables in, it may be impossible to use only relaxed memory order but for
+example accumulating incoming pushes (incrementing a counter where only the sum at the end matters
+and not in which order the counter was incremented) it is safe for relaxed memory order. 
+In other contexts you may need to also use memory order release and acquire.
+\end{enumerate}
+
+\subsubsection*{Questions}
+\begin{enumerate}
+\item What is your explanation to requirement 3?
+\item With only one thread doing work in phase 2 in Lab~3, can you move some of that work to phase~1 instead?
+\item Which memory order is used by default for compound assignment operators (such as \verb.+=.) ?  (in case you don't use C/C++, your answer may differ from these languages)
+\item Will you get a data-race if you switch to \verb.memory_order_relaxed. in C/C++? Why or why not?
+\item Can you notice any performance difference when using (1) sequential consistency memory order
+and (2) relaxed memory order? Why or why not do you think?
+\item Explain your source code.
+\item Did you find a way to improve the performance of your program over the first correct version?
+\item What is the purpose of each of memory order release and memory order acquire?
+
+\end{enumerate}
+
+\newpage
+\subsection*{Lab 5: Rust}
+\subsubsection*{Purposes}
+You will learn how Rust is used when
+\begin{itemize}
+\item different pointers need to point at an object: move and borrow
+\item multiple pointers/threads need to use an object: atomic reference counters
+\item moving objects when creating threads
+\end{itemize}
+
+\subsubsection*{Relevant sections in the book}
+See lecture 7 since Rust is not covered in the book.
+\subsubsection*{Requirements}
+\begin{enumerate}
+\item It is not permitted to use the keyword \verb.unsafe. which essentially makes the program as unsafe as C and C++. The whole point with Rust is that the compiler should give guarantees about the safety of the program but with \verb.unsafe. it cannot.
+\item Make a sequential version of preflow-push
+\item Make a parallel version of preflow-push
+\end{enumerate}
+
+\subsubsection*{Installing the Rust compiler macOS}
+If you have not yet done so, visit \verb!https://brew.sh! and follow the instructions. With \verb!brew! you 
+can install numerous useful command-line tools on your Mac.
+\begin{verbatim}
+brew install rust
+\end{verbatim}
+
+\subsubsection*{Installing the Rust compiler on Ubuntu and Windows}
+If you get the error message: \verb!/bin/sh: cargo: command not found! when you run \verb!make!, you need to 
+first install the Rust compiler:
+\begin{verbatim}
+sudo apt install rustc
+\end{verbatim}
+
+\subsubsection*{Note}
+\begin{enumerate}
+\item {\em Tentatively:} there is no performance requirement for this lab. 
+\item It is OK to use one shared set of active nodes. Optionally let each thread have
+its own set of active nodes.
+\end{enumerate}
+
+\subsubsection*{Optional}
+\begin{enumerate}
+\item Make the parallel version faster than your program from Lab~4 but it is not at all certain you will succeed --- rather, it is quite unlikely :)
+\end{enumerate}
+\subsubsection*{Questions}
+\begin{enumerate}
+\item Explain Rust's rules about moving and borrowing objects.
+\item Explain atomic reference counters.
+\item Explain your source code for your two programs.
+\item What do you think about parallelizing Rust code as compared with Java and C?
+\end{enumerate}
+\newpage
+\subsection*{Lab 6: TM, OpenMP, and parallelizing compilers}
+\subsubsection*{Purposes}
+You will learn about:
+\begin{itemize}
+\item hardware transactional memory in C
+\item software transactional memory in Clojure
+\item OpenMP
+\item parallelizing compilers
+\end{itemize}
+
+\subsubsection*{Relevant sections in the book}
+Chapter 20, and you may want to check out chapter 16 on optimizing compilers if you are curious but it is
+not part of the course really, and lecture 8 about Clojure.
+\subsubsection*{Requirements}
+\begin{enumerate}
+\item Modify one of your C programs to use hardware transactional memory.
+\item Make a sequential Clojure program for preflow-push.
+\item Parallelize your Clojure program.
+\item Parallelize matrix multiplication using OpenMP (copy \verb!mm.c! to a new file and add \verb.-fopenmp.) 
+and measure the speedup of the sequential version.  Make sure you have read the hint about accesses to the \verb.c.-matrix.
+\item Compare the performance of \verb!mm.c! using the commands below.
+Time a.out after each compilation. You may want to press CTRL-C after 10 s if
+a.out has not yet finished.
+\end{enumerate}
+The absolute paths to the IBM, PGI and Nvidia compilers are:
+\begin{verbatim} 
+/opt/ibm/xlC/16.1.1/bin/xlc
+/opt/nvidia/hpc_sdk/Linux_ppc64le/20.7/compilers/bin/nvcc
+/opt/nvidia/hpc_sdk/Linux_ppc64le/20.7/compilers/bin/pgcc
+\end{verbatim}
+and the following commands for clang, gcc, pgcc and xlc can be useful:
+\begin{verbatim} 
+clang -mcpu=power8 -O3 mm.c
+gcc -fexpensive-optimizations -mcpu=power8 -O3 mm.c
+gcc -ftree-parallelize-loops=80 -fexpensive-optimizations -mcpu=power8 -O3 mm.c
+pgcc -tp=pwr8 -O4 mm.c -Mconcur=allcores
+xlc -qarch=pwr8 -O5 -qsmp -qhot=level=2 mm.c
+\end{verbatim}
+
+\subsubsection*{Note}
+\begin{enumerate}
+\item There is no performance requirement for Clojure.
+\item It is OK to use one shared set of active nodes. Optionally let each thread have
+its own set of active nodes.
+\end{enumerate}
+
+\subsubsection*{Questions}
+\begin{enumerate}
+\item Why is it more reasonable to use software transactional memory with
+Clojure than with C, C++ or Java?
+\item How does Power detect conflicts between hardware transactions?
+\item Why can you not use I/O in a transaction, and which instructions can be used on Power if
+you need to print something?
+\item Explain your source codes.
+\end{enumerate}
+
+\newpage
+\section{Scala/Akka background}
+
+\subsubsection*{Lab input files}
+We assume you have copied the {\tt multicore} directory from Tresorit.
+All labs use the same input files located in {\tt multicore/data}.
+Each lab has its own check-solution script which will use these common
+input files. The first tests are from Lab~6 of EDAF05, except that we will not
+remove any edges (so $c$ and $p$ are ignored from that lab). There are also other tests.
+The graphs have $n$ nodes, numbered as $0..n-1$ with the source being $0$ and
+the sink $n-1$.
+
+\subsubsection*{{\tt sbt}}
+The Scala build tool, {\tt sbt}, can compile and run Scala programs. It downloads required libraries as needed.
+Since it compiles all Scala files in the current directory, it is usually a good idea to have only one Scala file
+in {\tt multicore/lab1}.
+Now give the commands:
+\begin{verbatim}
+cd multicore/lab1
+make
+\end{verbatim}
+If all is properly installed (such as Java), this will compile and run a file {\tt preflow.scala} in the
+lab~1 directory.
+
+The program {\tt make} looks for a file called {\tt makefile} which contains commands to execute, and in this
+case, it simply runs {\tt sbt} with an input file {\tt i} as standard input using so called I/O redirection, i.e.,
+like this
+\begin{verbatim}
+./sbt run < i
+\end{verbatim}
+The file {\tt i} contains a small example graph:
+\begin{verbatim}
+3 2 0 0
+0 1 10
+1 2 2
+\end{verbatim}
+The input format is as follows: the first line contains four values: $n$, $m$, $c$, and $p$ where $n$ is the number of nodes, $m$ is the number of edges, and the ignored $c$ and $p$.
+Then follow $m$ lines, each with an edge. An edge is specified as $u$, $v$, and a positive flow capacity. The edges
+are undirected and there can only be one edge between two specific nodes $u$ and $v$ in the input.
+
+In this example, the source will first push $10$ to node $1$ which can push $2$ to the sink, and then, eventually,
+push back $8$ to the source, so the maximum flow is $2$ and the program should print {\tt f = 2}.
+However, since the Scala program is incomplete, it will instead print {\tt f = 0}.
+
+\subsubsection*{Akka}
+Actors in different languages are usually very similar. We will now describe them in general terms for Akka.
+An actor is like a thread in that it can do things on its own, and an actor does one of two things:
+\begin{itemize}
+\item waits for a message to arrive, and
+\item processes the next message that it received.
+\end{itemize}
+Some important facts include:
+\begin{itemize}
+\item A message never interrupts and actor. The actor processes the current message and after that waits for new
+messages.
+\item To send a message to another actor, the sender usually does not wait for a reply (but it is possible, as we will see).
+\item If an actor sends multiple messages to another actor, all these messages will arrive in the same order. 
+\item There is no other order between messages.
+\item It is possible to avoid data-races by regarding all received data as read-only.
+\end{itemize}
+For the lab, each node should be an actor and this is achieved by extending the Actor class:
+\begin{ccode}
+class Node(val index: Int) extends Actor {
+	var	e = 0;				/* excess preflow. 						*/
+	var	h = 0;				/* height. 							*/
+   
+        /* ... */
+}
+\end{ccode}
+
+It is impossible to access an actor's private variables. Ask for their current value using a message.
+
+In the lab, there is one special actor which manages the computation, and then one actor for each node.
+
+To send a message, a reference to actor is needed plus the message. For example:
+\begin{ccode}
+node(t) ! Excess	/* ask sink for its excess preflow */
+\end{ccode}
+Here {\tt node(t)} is a reference to the sink node, \verb.!. is the operator to send a message without 
+waiting for a reply, and \verb.Excess. is a message. This message is the name of a type declared as
+\begin{ccode}
+case object Excess
+\end{ccode}
+A message without a parameter should be written as object as here. The \verb.case. is similar to 
+a case-statement in Java or C, i.e. code to execute is selected based on some value (as in a switch-statement).
+
+To receive this message, a node should have a function called {\tt receive} defined e.g. as
+\begin{ccode}
+def receive = {
+
+case Excess => { sender ! Flow(e) /* send our current e. */ }
+
+/* other cases */
+
+}
+\end{ccode}
+
+The syntax means: match a case, and then do what is to the right of the \verb.=>..
+To ''match'', the type of the message and the type of the case should be similar.
+A case with a lower case identifier would introduce a variable that matches anything so be 
+careful not to write:
+\begin{ccode}
+case excess => { sender ! Flow(e) /* reply with our current e. */
+\end{ccode}
+It matches any message type, so no case below can be matched.
+
+To reply to the same actor which sent us the message, the identifier \verb.sender. is available.
+With the node's excess preflow, stored in the attribute \verb.e., the following type can be used:
+\begin{ccode}
+case class Flow(f: Int)
+\end{ccode}
+With a parameter, we need to use \verb.class. instead of \verb.object..
+
+Suppose we want to save the \verb.sender. for future use. We then need a variable
+of type \verb.ActorRef. and in Scala we can declare it as:
+\begin{ccode}
+var	ret:ActorRef = null	/* ret is just a variable name. */
+\end{ccode}
+and when we have received a message, we can save its sender as
+\begin{ccode}
+ret = sender
+\end{ccode}
+
+The \verb.ActorRef. is like a C pointer or Java object reference. It is not the actor itself.
+The actor itself may be located in a computer on the other side of the world. For simplicity,
+we will say ''the actor'' when we should have said ''the actor that an \verb.ActorRef. refers to''.
+We cannot know what type it actually refers to. The only thing we can do is to send
+a message to it.
+
+Before going into more details, we should look at the (messy) syntax to actually create an actor.
+
+\subsubsection*{Creating an actor}
+Before we can create any actor, we need a reference to an actor ''system'' like this:
+\begin{ccode}
+	val system = ActorSystem("Main")
+\end{ccode}
+From the \verb.system. we can create new actors. If the constructor of the actor class
+takes no parameter, we can use:
+\begin{ccode}
+val control = system.actorOf(Props[Preflow], name = "control")
+\end{ccode}
+This is essentially the same as:
+\begin{ccode}
+Preflow control = new Preflow;
+\end{ccode}
+in Java. There is a hierarchy of actors so therefore new actors are created not just with \verb.new.
+but instead from a ''factory'' and this results in the syntax above. In addition, each new actor needs
+to have a name.
+
+For actors with a parameter to its constructor we need to use a different syntax.
+For example, to give the parameter \verb.index. to a new node (see \verb.Node. above) we
+can first declare the array of nodes. Note that type of the array element should be \verb.ActorRef.
+and not \verb.Node. as we might have expected:
+\begin{ccode}
+var	node: Array[ActorRef] = null
+\end{ccode}
+
+\noindent When we know the number of nodes, $n$, we can create the array:
+\begin{ccode}
+node = new Array[ActorRef](n)
+\end{ccode}
+
+\noindent and then the actors as array elements:
+
+\begin{ccode}
+for (i <- 0 to n-1)
+	node(i) = system.actorOf(Props(new Node(i)), name = "v" + i)
+\end{ccode}
+Note that with a parameter, we {\em should} use \verb.new..
+
+\subsection*{Lists in Scala}
+For more details about lists in Scala, please see the pdf lecture about Scala.
+A short summary is given here.
+
+An empty list of any type is written as \verb.List(). and to make to source
+code less cluttered we use:
+\begin{ccode}
+val	nil: List[Edge] = List()
+\end{ccode}
+To make the source code less cluttered, we use \verb.nil. for an empty edge list.
+
+A list variable should have a type such as \verb.edge. below
+\begin{ccode}
+var	edge: List[Edge] = nil		/* adjacency list. */
+\end{ccode}
+
+When we create an edge between $u$ and $v$, we insert the edge object (which is shared between $u$ and $v$)
+first in the node's adjacency list:
+\begin{ccode}
+case edge:Edge => { this.edge = edge :: this.edge }
+\end{ccode}
+
+So the actor is given an edge in a message and puts it in front of the current adjacency list, and
+then updates the adjacency list to point to this new list link.
+
+Suppose we want to iterate through an adjacency list. One way to do so is:
+\begin{ccode}
+for (r <- edge)
+	println("r is an edge: " + r)
+\end{ccode}
+and here \verb.r. will point to each \verb.Edge. object in turn.
+If you instead want to iterate through the list in a more manual fashion, you can do as follows:
+\begin{ccode}
+var	p: List[Edge]	= nil
+var	e:Edge		= null
+
+p = edge
+while (p != nil) {
+	e = p(0)
+	p = p.tail
+}
+\end{ccode}
+
+Here the expression \verb.p(k). means the edge stored $k$ list links away from \verb.p..
+
+\subsubsection*{{\tt this} vs {\tt self}}
+
+Suppose we have an object of type \verb.Node., i.e. a type which extends \verb.ActorRef..
+To refer to the node, we use {\tt this} as in Java, but to refer to the actor, 
+we instead use {\tt self}. This happens when the controller should send a reference to itself to
+each node.
+
+To match a message containing an actor, we should use \verb.ActorRef.:
+
+\begin{ccode}
+case Control(control:ActorRef)	=> this.control = control
+\end{ccode}
+So this case should not have any mention of the class of the object that we want to talk to, i.e., {\tt Preflow}.
+The reason is that an actor should not know which type it is. It should only talk to other actors.
+To distinguish between different message types, each containing an actor, we need to use a 
+different case class for each such message type.
+
+\subsubsection*{Waiting for a reply}
+To wait for a reply, we use \verb.?. instead of \verb.!. when we send a message:
+
+\begin{ccode}
+val flow = control ? Maxflow
+\end{ccode}
+We then create a timeout:
+\begin{ccode}
+implicit val t = Timeout(4 seconds);
+\end{ccode}
+and wait:
+\begin{ccode}
+val f = Await.result(flow, t.duration)
+\end{ccode}
+\subsubsection*{Terminating the program}
+To terminate the program, we can use:
+\begin{ccode}
+system.stop(control);
+system.terminate()
+\end{ccode}
+
+\section{Hints}
+\subsection*{Lab 1 hints}
+In the lab you need to extend the file \verb!preflow.scala! so that it can find the maxflow.
+How can that be done? A start is:
+
+\begin{itemize}
+\item Push from the source node to each of its neighbors by sending a suitable message (which does not exceed
+the remaing flow capacity of the edge, see Lab 0).
+\item As long as a node, other than the sink, has an excess preflow greater than zero, it should 
+push if it can, and if not, it should relabel.
+\item Somebody has to figure out when the algorithm has terminated. The easiest, and sufficient for the lab,
+is to have a controller which keeps track of nodes with excess preflow. If none (other than the source or sink)
+has excess preflow, the maxflow is the excess preflow of the sink.
+\end{itemize}
+
+What can go wrong with this?
+\begin{itemize}
+\item If $u$ tries to send preflow to $v$, it should fail if $u$ is not higher than $v$.
+Note that after the moment $u$ sends a message to $v$, the height of $v$ may have increased.
+
+\item Active nodes are nodes with excess preflow, and if the controller keeps track of how many are active,
+it is important to make sure there is never a risk that messages arrive to the controller in an order which
+would make the controller think none is active when there in fact is a node which soon is going to get some
+preflow from a neighbor.
+
+\end{itemize}
+
+
+\subsection*{Lab 2 hints}
+\begin{itemize}
+\item Even if you have never programmed in C before, it may be easier 
+to get a correct program in C than in Java thanks to the Google thread analyzer (tsan) and Helgrind.
+
+One year a group of two very good students made a quite complex Java 
+solution which had a bug. Instead of helping them, I suggested they should
+re-implement the bug for the next week's lab on C. They did and could solve
+the problem almost immediately using Helgrind (and immediately fix the Java program as well).
+
+\item Always start with the simplest possible solution.
+
+\item Identify which data two threads may access concurrently such that at
+least one thread may modify it.
+
+Try to identify when deadlocks can occur. For instance, if there is
+an edge $(u,v)$, and one thread $t_0$ is pushing from $u$ and another $t_1$
+from $v$, then if $t_0$ locks $u$ before locking $v$, and $t_1$ 
+locks $v$ before locking $u$, there is a deadlock.
+
+This situation is detected by tsan and Helgrind. In fact they detect
+that the threads try to take the locks in the opposite order and therefore
+warn that there is a risk for deadlock (even if one never happens during
+a particular execution).
+
+Two techniques to avoid deadlocks are 
+\begin{itemize}
+\item Impose a lock-order which for instance says that for an edge $(u,v)$,
+if a thread wants to lock both of $u$ and $v$, it must lock them in a
+predefined order (for instance, $u$ first if $u < v$).
+\item Use try-lock instead of lock. If the lock was already taken,
+the thread is not blocked. If a thread is pushing from $u$ and finds $v$
+locked, it can skip $v$ and check the next edge instead --- but see the
+next hint about doing a relabel too early.
+\end{itemize}
+
+\item It is a bug to relabel a node if it actually could do a push.
+
+\item If you for instance (1) have a shared set of nodes with excess 
+preflow, (2) that set is locked when a thread $t$ wants to remove from it (or
+add a node to it), and (3) $t$ has nothing else to do while waiting,
+then a condition-variable can be used to wake up $t$ when $t$ should make
+a new attempt to do something with that set. While this may sound reasonable
+it will probably lead to bad performance due to contention to the shared set.
+Can you avoid using synchronization when a thread should take its next node
+to process?
+\end{itemize}
+
+\subsection*{Lab 3 hints}
+
+\begin{itemize}
+\item Instead of locking nodes and edges as needed, preflow-push can be
+be divided into two phases such that the heights and edge flows
+are not modified immediately. We can then have multiple iterations
+where each iteration consists of two phases.
+
+\item In the first phase all threads are allowed to read any node's 
+height, and no relabel is permitted.
+
+\item If a relabel is needed, it can be performed in the second phase.
+
+\item How many times can the flow of an edge
+be changed per iteration?
+
+\item When should the excess preflow of a node 
+be modified and when should the node be
+	put in some thread's set of active nodes? Recall from Lab~1 on
+	Akka, we say a node is active if it has excess preflow > 0.
+
+\item We have edge flow modifications, and for a node modifications
+of heights, excess preflows, and
+the next pointer (to the next active node in some thread's set).
+How can these ''commands'' be represented and who should perform them? 
+One option is to let each thread use an array of structs so that
+each struct represents the modifications of one node.
+
+\item If you want have an array of structs but you don't know how many elements
+will be required, you can do essentially as follows:
+
+\begin{ccode}
+typedef struct {
+	int	x;
+	int	y;
+} something_t;
+
+something_t*		a;	// pointer to the first element
+int			c;	// storage capacity (number of elements)
+int			i;	// next available element
+
+c = 2;
+a = malloc(c * sizeof a[0]);	// memory for two elements
+if (a == NULL)
+	error("no memory");	// error is not a standard function
+i = 0;
+
+if (i == c) {
+	something_t*	b;
+
+	c *= 2; // double the capacity
+	b = realloc(a, c * sizeof(a[0]));
+	if (b == NULL)
+		error("no memory");
+	a = b;
+}
+
+a[i].x = x;
+a[i].y = y;
+i += 1;
+\end{ccode}
+When the array is no longer needed, you call \verb!free(a)!, but you should not
+free the old array after using \verb.realloc., since that is taken care of by
+\verb.realloc. if needed (it can happen that \verb.realloc. found available memory
+after the end of \verb.a. so no free was needed).
+
+\item Pthread barriers are useful to make sure all threads agree on 
+in which phase work should be done. 
+
+\item When a barrier is initialized, one parameter is the number of
+threads $T$ that will use it. Each thread calls the
+\verb.pthread_barrier_wait. 
+function with the same barrier as an 
+argument. At a call, the first $T-1$ threads are blocked, and when the last thread has
+made the call, all threads are allowed to resume execution.
+
+\item Note that a memory barrier (as in the Linux kernel or Power instruction) is different from a Pthreads barrier.
+
+
+\end{itemize}
+
+
+\subsection*{Lab 4 hints}
+\begin{itemize}
+\item To quickly find the machine instructions of some code, you can 
+add a global volatile variable and do something with it that is easy to search for in
+the assembler file.
+On Power, you can compile with \verb.-S. and then look in the file with suffix \verb.s.. 
+\begin{ccode}
+volatile int hello;
+void relabel(graph_t* g, node_t* u)
+{
+	hello &= 0x1234;
+        u->h += 1;
+	hello &= 0x5678;
+
+        enter_excess(g, u);
+}
+\end{ccode}
+Then search for \verb.0x1234. and \verb.0x5678., and you should see the assembler code for \verb.u->h += 1. in
+between (the Power instruction for \verb.&=. is \verb!andi.! which means and-immediate and (the meaning of the dot suffix) set condition-codes).
+
+
+
+
+\end{itemize}
+
+\subsection*{Lab 5 hints}
+\begin{itemize}
+\item If you get an error message from \verb.cargo. about an operation not permitted, it may help
+to remove the \verb.target. directory (which will be re-created automatically when compiling the
+next time). So if you see:
+\begin{ccode}
+Operation not permitted (os error 1)
+\end{ccode}
+then do
+\begin{ccode}
+rm -rf target
+\end{ccode}
+but beware that \verb.rm -rf. is a dangerous command that recursively removes the argument files without asking so be
+careful.
+\item Start with studying the \verb!swish.rs! program which simulates a number of swish transactions. 
+You can compile it with
+\begin{ccode}
+rustc swish.rs
+\end{ccode}
+and run it with
+\begin{ccode}
+./a.out
+\end{ccode}
+\item Then make the sequential preflow-push program complete. It is in the directory:
+\begin{ccode}
+lab5/seq-rust/src/main.rs
+\end{ccode}
+Type:
+\begin{ccode}
+cd lab5/seq-rust/src
+cargo run
+\end{ccode}
+which should compile and run an incomplete program.
+
+\item Suppose you have a lock for the source node, and want to set its height to $n$, and do
+\begin{ccode}
+let mut source = node_array[s].lock().unwrap();
+source.h = n as i32;
+
+// continue with initial pushes
+// and then run the while-loop
+\end{ccode}
+A problem with this code is that the lock taken for \verb.source. is not unlocked until
+\verb.source. goes out of scope, so if you continue with the rest of the algorithm and
+still have it locked, you cannot lock it again. Depending on your source code, you may
+need to unlock by putting the above code in a block:
+\begin{ccode}
+{
+	let mut source = node_array[s].lock().unwrap();
+	source.h = n as i32;
+}
+\end{ccode}
+The lock is unlocked when \verb.source. goes out of scope at the \verb.}..
+
+\item Then copy the \verb.seq-rust. directory
+\begin{ccode}
+cp -r seq-rust par-rust
+cd par-rust
+cargo run
+\end{ccode}
+and parallelize it.
+
+\end{itemize}
+
+\subsection*{Lab 6 hints}
+\begin{itemize}
+\item It is assumed you use a barrier and two phases. Most of the work is done in phase~1 but some 
+of the work done in phase~2 can be moved to phase~1, as with atomic variables. The question is
+if we can avoid overhead due to locks or atomic variables, or improve load-balance, by using transactional memory.
+\item Note that with transactional memory we can easily use any normal syntax and not only 
+be limited to what can be expressed with atomic variables. Updating of pointers, for instance, is 
+trivial with transactional memory.
+\item You should start threads as usual and the difference is how the transactions can be used
+instead of other synchronization primitives. 
+\item You need to identify where data-races can occur without any use of synchronization and then
+put that code in a block:
+\begin{ccode}
+__transaction_atomic {
+	/* in principle any amount of reads and writes */
+}
+\end{ccode}
+\item Too many memory accesses in transactions usually lead to conflicts and transaction-restarts.
+\item You need to compile with
+\begin{ccode}
+gcc file.c -fgnu-tm -O3
+\end{ccode}
+\item Too many memory accesses in transactions usually lead to conflicts and transaction-restarts.
+\item There is a good chance your program will work at the first attempt.
+
+\item Start with studying the \verb!swish.clj! program. The purpose is to see how \verb.ref. variables
+to array elements can be modified, and how incrementing or decrementing an attribute of an
+object can be done using \verb!update!.
+\item Note \verb.recur. used to call the same function recursively, and \verb!first! and \verb!rest!
+to get the data in a list and the rest of the list, respectively.
+
+\item Then make a sequential \verb!preflow.clj! complete.
+\item Add threads using the same technique as in the swish program. As when using TM for C, your  program should work at once.
+\item All C compilers on Power support the \verb!--help! option but you probably don't want to read all. 
+Some useful flags include:
+\begin{itemize}
+\item \verb.pgcc -Minfo=all.
+\item \verb.xlc -qreport. which will produce a file with suffix \verb.lst..
+\end{itemize}
+\item Note that in the \verb!matmul! function, the \verb!c[k][j]! reference will result in very 
+bad cache performance since each iteration of the inner loop is to a different row, which typically is not
+in the cache. Can you change that in a trivial way (which clang appears to miss)?
+\end{itemize}
+
+\end{document}

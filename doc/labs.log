@@ -1,0 +1,1167 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.24)  1 OCT 2024 15:59
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**labs
+(./labs.tex
+LaTeX2e <2024-06-01> patch level 2
+L3 programming layer <2024-07-20>
+(./forsete.cls
+Document Class: forsete 2008/12/04
+(/opt/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
+)
+(/opt/texlive/texmf-dist/tex/latex/shorttoc/shorttoc.sty
+Package: shorttoc 2002/08/20 v1.3 Short table of contents (JPFD)
+)
+(/opt/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+) (./forsetedocument.cls
+Document Class: forsetedocument 2008/12/31
+(/opt/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/02/08 v1.4n Standard LaTeX document class
+(/opt/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2024/02/08 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count194
+\c@section=\count195
+\c@subsection=\count196
+\c@subsubsection=\count197
+\c@paragraph=\count198
+\c@subparagraph=\count199
+\c@figure=\count266
+\c@table=\count267
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen141
+)
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mathdesign.sty
+Package: mathdesign 2013/08/29 v2.31 Math Design Project
+
+(/opt/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks19
+)
+(/opt/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
+)
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mdbch/mdbch.cfg)
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mdbch/mdbch.sty
+Package: mdbch 2013/08/29 v2.31 bitstream bitstream charter + mdbch (Math Desig
+n Project)
+
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mdfont.def
+File: mdfont.def 2013/08/29 v2.31 (Math Design Project)
+)
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mdsffont.def
+File: mdsffont.def 2013/08/29 v2.31 (Math Design Project)
+
+
+LaTeX Info: Font shape OT1/phv/mc/n has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 53.
+
+
+LaTeX Info: Font shape OT1/phv/mc/sc has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 56.
+
+
+LaTeX Info: Font shape OT1/phv/mc/sl has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 59.
+
+
+LaTeX Info: Font shape OT1/phv/mc/it has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 79.
+
+
+LaTeX Info: Font shape T1/phv/mc/n has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 102.
+
+
+LaTeX Info: Font shape T1/phv/mc/sc has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 105.
+
+
+LaTeX Info: Font shape T1/phv/mc/sl has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 108.
+
+
+LaTeX Info: Font shape T1/phv/mc/it has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 128.
+
+
+LaTeX Info: Font shape OT1/uhv/mc/n has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 259.
+
+
+LaTeX Info: Font shape OT1/uhv/mc/sc has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 262.
+
+
+LaTeX Info: Font shape OT1/uhv/mc/sl has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 265.
+
+
+LaTeX Info: Font shape OT1/uhv/mc/it has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 268.
+
+
+LaTeX Info: Font shape T1/uhv/mc/n has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 313.
+
+
+LaTeX Info: Font shape T1/uhv/mc/sc has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 316.
+
+
+LaTeX Info: Font shape T1/uhv/mc/sl has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 319.
+
+
+LaTeX Info: Font shape T1/uhv/mc/it has incorrect series value `mc'.
+            It should not contain an `m'! Please correct it.
+            Found on input line 322.
+
+) (/opt/texlive/texmf-dist/tex/latex/mathdesign/mdttfont.def
+File: mdttfont.def 2013/08/29 v2.31 (Math Design Project)
+)
+\symmdcal=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `mdcal' in version `bold'
+(Font)                  OMS/mdbch/m/n --> OMS/mdbch/b/n on input line 97.
+\symmdscr=\mathgroup5
+LaTeX Font Info:    Overwriting symbol font `mdscr' in version `bold'
+(Font)                  OMS/mdbch/m/n --> OMS/mdbch/b/n on input line 103.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/xmdeuf/m/n --> U/xmdeuf/b/n on input line 110.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/mdbch/m/n on input line 121.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/mdbch/m/it on input line 122.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/mdbch/m/n on input line 123.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/mdbch/m/n on input line 124.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/mdbch/b/n on input line 126.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/mdbch/b/it on input line 127.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/mdbch/b/n on input line 128.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/mdbch/b/n on input line 129.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/mdbch/m/n --> OT1/mdbch/m/n on input line 131.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/mdbch/b/n on input line 132.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/mdbch/m/it on input line 133.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/cmss/m/n on input line 134.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/m/n on input line 135.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
+(Font)                  OT1/mdbch/b/n --> OT1/mdbch/b/n on input line 137.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/mdbch/b/n on input line 138.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/mdbch/b/it on input line 139.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/cmss/b/n on input line 140.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/cmtt/b/n on input line 141.
+\symlettersupright=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `lettersupright' in version `bold'
+(Font)                  OML/mdbch/m/n --> OML/mdbch/b/n on input line 144.
+LaTeX Font Info:    Redeclaring math alphabet \mathrm on input line 145.
+LaTeX Font Info:    Overwriting math alphabet `\mathcal' in version `normal'
+(Font)                  OMS/mdbch/m/n --> OMS/mdbch/m/n on input line 167.
+
+(/opt/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
+
+(/opt/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/opt/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+\XKV@toks=\toks20
+\XKV@tempa@toks=\toks21
+)
+\XKV@depth=\count268
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+LaTeX Font Info:    Trying to load font information for OT1+mdbch on input line
+ 186.
+
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mdbch/ot1mdbch.fd
+File: ot1mdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OT1/mdbch.
+)
+LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
+(Font)              scaled to size 9.60007pt on input line 186.
+LaTeX Font Info:    Redeclaring math accent \widetilde on input line 449.
+LaTeX Font Info:    Redeclaring math accent \widehat on input line 450.
+Now handling font encoding MDA ...
+... no UTF-8 mapping file for font encoding MDA
+\symmathdesignA=\mathgroup7
+LaTeX Font Info:    Overwriting symbol font `mathdesignA' in version `bold'
+(Font)                  MDA/mdbch/m/n --> MDA/mdbch/b/n on input line 491.
+Now handling font encoding MDB ...
+... no UTF-8 mapping file for font encoding MDB
+\symmathdesignB=\mathgroup8
+LaTeX Font Info:    Overwriting symbol font `mathdesignB' in version `bold'
+(Font)                  MDB/mdbch/m/n --> MDB/mdbch/b/n on input line 498.
+\@emptytoks=\toks22
+LaTeX Font Info:    Redeclaring math accent \widetilde on input line 532.
+LaTeX Font Info:    Redeclaring math accent \widehat on input line 533.
+\rulethickness=\skip51
+)
+(/opt/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+mdbch on input line 
+116.
+
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mdbch/t1mdbch.fd
+File: t1mdbch.fd 2013/08/29 Fontinst v1.933 font definitions for T1/mdbch.
+)
+LaTeX Font Info:    Font shape `T1/mdbch/m/n' will be
+(Font)              scaled to size 9.60007pt on input line 116.
+))
+(/opt/texlive/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2024/03/29 v3.1b Micro-typographical refinements (RS)
+
+(/opt/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count269
+)
+\MT@toks=\toks23
+\MT@tempbox=\box52
+\MT@count=\count270
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1061.
+LaTeX Info: Redefining \leftprotrusion on input line 1062.
+\MT@prot@toks=\toks24
+LaTeX Info: Redefining \rightprotrusion on input line 1081.
+LaTeX Info: Redefining \textls on input line 1392.
+\MT@outer@kern=\dimen142
+LaTeX Info: Redefining \textmicrotypecontext on input line 2013.
+\MT@listname@count=\count271
+
+(/opt/texlive/texmf-dist/tex/latex/microtype/microtype-pdftex.def
+File: microtype-pdftex.def 2024/03/29 v3.1b Definitions specific to pdftex (RS)
+
+LaTeX Info: Redefining \lsstyle on input line 902.
+LaTeX Info: Redefining \lslig on input line 902.
+\MT@outer@space=\skip52
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(/opt/texlive/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2024/03/29 v3.1b microtype main configuration file (RS)
+))
+(/opt/texlive/texmf-dist/tex/latex/bera/bera.sty
+Package: bera 2004/01/31 (WaS)
+
+(/opt/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(/opt/texlive/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+)
+(/opt/texlive/texmf-dist/tex/latex/bera/beraserif.sty
+Package: beraserif 2004/01/30 (WaS)
+LaTeX Font Info:    Font shape `T1/fve/m/n' will be
+(Font)              scaled to size 8.43994pt on input line 30.
+)
+(/opt/texlive/texmf-dist/tex/latex/bera/berasans.sty
+Package: berasans 2004/01/30 (WaS)
+)
+(/opt/texlive/texmf-dist/tex/latex/bera/beramono.sty
+Package: beramono 2004/01/31 (WaS)
+))
+(/opt/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count272
+\lst@gtempboxa=\box53
+\lst@token=\toks25
+\lst@length=\count273
+\lst@currlwidth=\dimen143
+\lst@column=\count274
+\lst@pos=\count275
+\lst@lostspace=\dimen144
+\lst@width=\dimen145
+\lst@newlines=\count276
+\lst@lineno=\count277
+\lst@maxwidth=\dimen146
+
+(/opt/texlive/texmf-dist/tex/latex/listings/lstpatch.sty
+File: lstpatch.sty 2024/05/25 1.10b (Carsten Heinz)
+)
+(/opt/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/05/25 1.10b (Carsten Heinz)
+\c@lstnumber=\count278
+\lst@skipnumbers=\count279
+\lst@framebox=\box54
+)
+(/opt/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2024/05/25 1.10b listings configuration
+))
+Package: listings 2024/05/25 1.10b (Carsten Heinz)
+
+(/opt/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/opt/texlive/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/opt/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks26
+\pgfutil@tempdima=\dimen147
+\pgfutil@tempdimb=\dimen148
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box55
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+(/opt/texlive/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2023-01-15 v3.1.10 (3.1.10)
+))
+Package: pgf 2023-01-15 v3.1.10 (3.1.10)
+
+(/opt/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/opt/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/opt/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/05/23 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+
+(/opt/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+)
+(/opt/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+
+(/opt/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen149
+\Gin@req@width=\dimen150
+)
+(/opt/texlive/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/opt/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
+
+(/opt/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks27
+\pgfkeys@temptoks=\toks28
+
+(/opt/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.
+tex
+\pgfkeys@tmptoks=\toks29
+))
+\pgf@x=\dimen151
+\pgf@y=\dimen152
+\pgf@xa=\dimen153
+\pgf@ya=\dimen154
+\pgf@xb=\dimen155
+\pgf@yb=\dimen156
+\pgf@xc=\dimen157
+\pgf@yc=\dimen158
+\pgf@xd=\dimen159
+\pgf@yd=\dimen160
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count280
+\c@pgf@countb=\count281
+\c@pgf@countc=\count282
+\c@pgf@countd=\count283
+\t@pgf@toka=\toks30
+\t@pgf@tokb=\toks31
+\t@pgf@tokc=\toks32
+\pgf@sys@id@count=\count284
+ (/opt/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
+)
+Driver file for pgf: pgfsys-pdftex.def
+
+(/opt/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2023-01-15 v3.1.10 (3.1.10)
+
+(/opt/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
+)))
+(/opt/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfsyssoftpath@smallbuffer@items=\count285
+\pgfsyssoftpath@bigbuffer@items=\count286
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))
+(/opt/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2023/11/15 v3.01 LaTeX color extensions (UK)
+
+(/opt/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+
+(/opt/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1350.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1354.
+Package xcolor Info: Model `RGB' extended on input line 1366.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1368.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
+
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen161
+\pgfmath@count=\count287
+\pgfmath@box=\box56
+\pgfmath@toks=\toks33
+\pgfmath@stack@operand=\toks34
+\pgfmath@stack@operation=\toks35
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex)
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex)
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.co
+de.tex)
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex)
+
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.
+tex)
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex)
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex)
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex)
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmeti
+cs.code.tex) (/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+) (/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count288
+))
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfint.code.tex)
+(/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@picminx=\dimen162
+\pgf@picmaxx=\dimen163
+\pgf@picminy=\dimen164
+\pgf@picmaxy=\dimen165
+\pgf@pathminx=\dimen166
+\pgf@pathmaxx=\dimen167
+\pgf@pathminy=\dimen168
+\pgf@pathmaxy=\dimen169
+\pgf@xx=\dimen170
+\pgf@xy=\dimen171
+\pgf@yx=\dimen172
+\pgf@yy=\dimen173
+\pgf@zx=\dimen174
+\pgf@zy=\dimen175
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.t
+ex
+File: pgfcorepathconstruct.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@path@lastx=\dimen176
+\pgf@path@lasty=\dimen177
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@shorten@end@additional=\dimen178
+\pgf@shorten@start@additional=\dimen179
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfpic=\box57
+\pgf@hbox=\box58
+\pgf@layerbox@main=\box59
+\pgf@picture@serial@count=\count289
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.te
+x
+File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgflinewidth=\dimen180
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code
+.tex
+File: pgfcoretransformations.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@pt@x=\dimen181
+\pgf@pt@y=\dimen182
+\pgf@pt@temp=\dimen183
+) (/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.
+tex
+File: pgfcorepathprocessing.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowsep=\dimen184
+) (/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@max=\dimen185
+\pgf@sys@shading@range@num=\count290
+\pgf@shadingcount=\count291
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfexternal@startupbox=\box60
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.te
+x
+File: pgfcoretransparency.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2023-01-15 v3.1.10 (3.1.10)
+) (/opt/texlive/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)))
+(/opt/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfnodeparttextbox=\box61
+)
+(/opt/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))
+(/opt/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/opt/texlive/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/opt/texlive/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/opt/texlive/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/opt/texlive/texmf-dist/tex/latex/pgf/math/pgfmath.sty
+(/opt/texlive/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex))
+(/opt/texlive/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
+\pgffor@iter=\dimen186
+\pgffor@skip=\dimen187
+\pgffor@stack=\toks36
+\pgffor@toks=\toks37
+))
+(/opt/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2023-01-15 v3.1.10 (3.1.10)
+
+(/opt/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.
+tex
+File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@plot@mark@count=\count292
+\pgfplotmarksize=\dimen188
+)
+\tikz@lastx=\dimen189
+\tikz@lasty=\dimen190
+\tikz@lastxsaved=\dimen191
+\tikz@lastysaved=\dimen192
+\tikz@lastmovetox=\dimen193
+\tikz@lastmovetoy=\dimen194
+\tikzleveldistance=\dimen195
+\tikzsiblingdistance=\dimen196
+\tikz@figbox=\box62
+\tikz@figbox@bg=\box63
+\tikz@tempbox=\box64
+\tikz@tempbox@bg=\box65
+\tikztreelevel=\count293
+\tikznumberofchildren=\count294
+\tikznumberofcurrentchild=\count295
+\tikz@fig@count=\count296
+ (/opt/texlive/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfmatrixcurrentrow=\count297
+\pgfmatrixcurrentcolumn=\count298
+\pgf@matrix@numberofcolumns=\count299
+)
+\tikz@expandcount=\count300
+
+(/opt/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibra
+rytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))) (/opt/texlive/texmf-dist/tex/latex/base/makeidx.sty
+Package: makeidx 2021/10/04 v1.0m Standard LaTeX package
+)
+(/opt/texlive/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2024/05/23 v1.9h multicolumn formatting (FMi)
+\c@tracingmulticols=\count301
+\mult@box=\box66
+\multicol@leftmargin=\dimen197
+\c@unbalance=\count302
+\c@collectmore=\count303
+\doublecol@number=\count304
+\multicoltolerance=\count305
+\multicolpretolerance=\count306
+\full@width=\dimen198
+\page@free=\dimen199
+\premulticols=\dimen256
+\postmulticols=\dimen257
+\multicolsep=\skip53
+\multicolbaselineskip=\skip54
+\partial@page=\box67
+\last@line=\box68
+\mc@boxedresult=\box69
+\maxbalancingoverflow=\dimen258
+\mult@rightbox=\box70
+\mult@grightbox=\box71
+\mult@firstbox=\box72
+\mult@gfirstbox=\box73
+\@tempa=\box74
+\@tempa=\box75
+\@tempa=\box76
+\@tempa=\box77
+\@tempa=\box78
+\@tempa=\box79
+\@tempa=\box80
+\@tempa=\box81
+\@tempa=\box82
+\@tempa=\box83
+\@tempa=\box84
+\@tempa=\box85
+\@tempa=\box86
+\@tempa=\box87
+\@tempa=\box88
+\@tempa=\box89
+\@tempa=\box90
+\@tempa=\box91
+\@tempa=\box92
+\@tempa=\box93
+\@tempa=\box94
+\@tempa=\box95
+\@tempa=\box96
+\@tempa=\box97
+\@tempa=\box98
+\@tempa=\box99
+\@tempa=\box100
+\@tempa=\box101
+\@tempa=\box102
+\@tempa=\box103
+\@tempa=\box104
+\@tempa=\box105
+\@tempa=\box106
+\@tempa=\box107
+\@tempa=\box108
+\@tempa=\box109
+\c@minrows=\count307
+\c@columnbadness=\count308
+\c@finalcolumnbadness=\count309
+\last@try=\dimen259
+\multicolovershoot=\dimen260
+\multicolundershoot=\dimen261
+\mult@nat@firstbox=\box110
+\colbreak@box=\box111
+\mc@col@check@num=\count310
+)
+(/opt/texlive/texmf-dist/tex/latex/base/fleqn.sty
+
+LaTeX Warning: inputting `fleqn.clo' instead of obsolete `fleqn.sty'.
+
+(/opt/texlive/texmf-dist/tex/latex/base/fleqn.clo
+File: fleqn.clo 2016/12/29 v1.2b Standard LaTeX option (flush left equations)
+\mathindent=\skip55
+Applying: [2015/01/01] Make \[ robust on input line 50.
+LaTeX Info: Redefining \[ on input line 51.
+Already applied: [0000/00/00] Make \[ robust on input line 62.
+Applying: [2015/01/01] Make \] robust on input line 74.
+LaTeX Info: Redefining \] on input line 75.
+Already applied: [0000/00/00] Make \] robust on input line 83.
+))
+(/opt/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2024/06/14 v2.6d Tabular extension package (FMi)
+\col@sep=\dimen262
+\ar@mcellbox=\box112
+\extrarowheight=\dimen263
+\NC@list=\toks38
+\extratabsurround=\skip56
+\backup@length=\skip57
+\ar@cellbox=\box113
+)
+(/opt/texlive/texmf-dist/tex/latex/base/latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup9
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
+)
+(/opt/texlive/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks39
+\verbatim@line=\toks40
+\verbatim@in@stream=\read3
+)
+(/opt/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2024/05/25 1.10b listings language file
+)
+(/opt/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2024/05/25 1.10b (Carsten Heinz)
+)))
+(/opt/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(/opt/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(/opt/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+))
+\Gm@cnth=\count311
+\Gm@cntv=\count312
+\c@Gm@tempcnt=\count313
+\Gm@bindingoffset=\dimen264
+\Gm@wd@mp=\dimen265
+\Gm@odd@mp=\dimen266
+\Gm@even@mp=\dimen267
+\Gm@layoutwidth=\dimen268
+\Gm@layoutheight=\dimen269
+\Gm@layouthoffset=\dimen270
+\Gm@layoutvoffset=\dimen271
+\Gm@dimlist=\toks41
+)
+(/opt/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count314
+\l__pdf_internal_box=\box114
+) (./labs.aux)
+\openout1 = `labs.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for MDA/cmr/m/n on input line 9.
+LaTeX Font Info:    Trying to load font information for MDA+cmr on input line 9
+.
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mdacmr.fd
+File: mdacmr.fd 
+)
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for MDB/cmr/m/n on input line 9.
+LaTeX Font Info:    Trying to load font information for MDB+cmr on input line 9
+.
+
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mdbcmr.fd
+File: mdbcmr.fd 
+)
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Info: Redefining \microtypecontext on input line 9.
+Package microtype Info: Applying patch `item' on input line 9.
+Package microtype Info: Applying patch `toc' on input line 9.
+Package microtype Info: Applying patch `eqnum' on input line 9.
+Package microtype Info: Applying patch `footnote' on input line 9.
+Package microtype Info: Applying patch `verbatim' on input line 9.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `alltext-nott'.
+LaTeX Info: Redefining \showhyphens on input line 9.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `fve' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+\c@lstlisting=\count315
+
+(/opt/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count316
+\scratchdimen=\dimen272
+\scratchbox=\box115
+\nofMPsegments=\count317
+\nofMParguments=\count318
+\everyMPshowfont=\toks42
+\MPscratchCnt=\count319
+\MPscratchDim=\dimen273
+\MPnumerator=\count320
+\makeMPintoPDFobject=\count321
+\everyMPtoPDFconversion=\toks43
+) (/opt/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/opt/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: custom
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(62.59605pt, 341.43306pt, 62.59607pt)
+* v-part:(T,H,B)=(47.80063pt, 540.60236pt, 71.70094pt)
+* \paperwidth=466.62518pt
+* \paperheight=660.10393pt
+* \textwidth=341.43306pt
+* \textheight=540.60236pt
+* \oddsidemargin=-9.67393pt
+* \evensidemargin=-9.67393pt
+* \topmargin=-61.46936pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Font Info:    Font shape `T1/fve/m/n' will be
+(Font)              scaled to size 14.58421pt on input line 10.
+LaTeX Font Info:    Font shape `T1/fve/m/n' will be
+(Font)              scaled to size 10.12793pt on input line 10.
+LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
+(Font)              scaled to size 11.52008pt on input line 10.
+(/opt/texlive/texmf-dist/tex/latex/microtype/mt-bch.cfg
+File: mt-bch.cfg 2007/03/03 v1.5 microtype config. file: Bitstream Charter (RS)
+
+)
+LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
+(Font)              scaled to size 7.68005pt on input line 10.
+LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
+(Font)              scaled to size 5.76004pt on input line 10.
+LaTeX Font Info:    Trying to load font information for OML+mdbch on input line
+ 10.
+
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mdbch/omlmdbch.fd
+File: omlmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OML/mdbch.
+)
+LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
+(Font)              scaled to size 11.52008pt on input line 10.
+LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
+(Font)              scaled to size 7.68005pt on input line 10.
+LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
+(Font)              scaled to size 5.76004pt on input line 10.
+LaTeX Font Info:    Trying to load font information for OMS+mdbch on input line
+ 10.
+
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mdbch/omsmdbch.fd
+File: omsmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OMS/mdbch.
+)
+LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
+(Font)              scaled to size 11.52008pt on input line 10.
+LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
+(Font)              scaled to size 7.68005pt on input line 10.
+LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
+(Font)              scaled to size 5.76004pt on input line 10.
+LaTeX Font Info:    Trying to load font information for OMX+mdbch on input line
+ 10.
+
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mdbch/omxmdbch.fd
+File: omxmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for OMX/mdbch.
+)
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 11.52008pt on input line 10.
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 7.68005pt on input line 10.
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 5.76004pt on input line 10.
+LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
+(Font)              scaled to size 11.52008pt on input line 10.
+LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
+(Font)              scaled to size 7.68005pt on input line 10.
+LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
+(Font)              scaled to size 5.76004pt on input line 10.
+LaTeX Font Info:    Trying to load font information for MDA+mdbch on input line
+ 10.
+
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mdbch/mdamdbch.fd
+File: mdamdbch.fd 2013/08/29 Fontinst v1.933 font definitions for MDA/mdbch.
+)
+LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
+(Font)              scaled to size 11.52008pt on input line 10.
+LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
+(Font)              scaled to size 7.68005pt on input line 10.
+LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
+(Font)              scaled to size 5.76004pt on input line 10.
+LaTeX Font Info:    Trying to load font information for MDB+mdbch on input line
+ 10.
+
+(/opt/texlive/texmf-dist/tex/latex/mathdesign/mdbch/mdbmdbch.fd
+File: mdbmdbch.fd 2013/08/29 Fontinst v1.933 font definitions for MDB/mdbch.
+)
+LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
+(Font)              scaled to size 11.52008pt on input line 10.
+LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
+(Font)              scaled to size 7.68005pt on input line 10.
+LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
+(Font)              scaled to size 5.76004pt on input line 10.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 10
+.
+
+(/opt/texlive/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+LaTeX Font Info:    Font shape `T1/fve/m/n' will be
+(Font)              scaled to size 12.1535pt on input line 12.
+LaTeX Font Info:    Font shape `T1/fve/b/n' will be
+(Font)              scaled to size 12.1535pt on input line 12.
+ (./labs.toc
+LaTeX Font Info:    Font shape `T1/fve/b/n' will be
+(Font)              scaled to size 8.43994pt on input line 1.
+)
+\tf@toc=\write4
+\openout4 = `labs.toc'.
+
+LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
+(Font)              scaled to size 6.72005pt on input line 16.
+LaTeX Font Info:    Font shape `OT1/mdbch/m/n' will be
+(Font)              scaled to size 4.80003pt on input line 16.
+LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
+(Font)              scaled to size 9.60007pt on input line 16.
+LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
+(Font)              scaled to size 6.72005pt on input line 16.
+LaTeX Font Info:    Font shape `OML/mdbch/m/it' will be
+(Font)              scaled to size 4.80003pt on input line 16.
+LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
+(Font)              scaled to size 9.60007pt on input line 16.
+LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
+(Font)              scaled to size 6.72005pt on input line 16.
+LaTeX Font Info:    Font shape `OMS/mdbch/m/n' will be
+(Font)              scaled to size 4.80003pt on input line 16.
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 9.60007pt on input line 16.
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 6.72005pt on input line 16.
+LaTeX Font Info:    Font shape `OMX/mdbch/m/n' will be
+(Font)              scaled to size 4.80003pt on input line 16.
+LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
+(Font)              scaled to size 9.60007pt on input line 16.
+LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
+(Font)              scaled to size 6.72005pt on input line 16.
+LaTeX Font Info:    Font shape `OML/mdbch/m/n' will be
+(Font)              scaled to size 4.80003pt on input line 16.
+LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
+(Font)              scaled to size 9.60007pt on input line 16.
+LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
+(Font)              scaled to size 6.72005pt on input line 16.
+LaTeX Font Info:    Font shape `MDA/mdbch/m/n' will be
+(Font)              scaled to size 4.80003pt on input line 16.
+LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
+(Font)              scaled to size 9.60007pt on input line 16.
+LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
+(Font)              scaled to size 6.72005pt on input line 16.
+LaTeX Font Info:    Font shape `MDB/mdbch/m/n' will be
+(Font)              scaled to size 4.80003pt on input line 16.
+
+
+[1
+
+{/opt/texlive/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/opt/texlive/texmf-
+dist/fonts/enc/dvips/base/8r.enc}]
+LaTeX Font Info:    Font shape `T1/fve/m/it' in size <10> not available
+(Font)              Font shape `T1/fve/m/sl' tried instead on input line 72.
+LaTeX Font Info:    Font shape `T1/fve/m/sl' will be
+(Font)              scaled to size 8.43994pt on input line 72.
+
+
+[2]
+LaTeX Font Info:    Trying to load font information for TS1+fve on input line 8
+6.
+ (/opt/texlive/texmf-dist/tex/latex/bera/ts1fve.fd
+File: ts1fve.fd 2004/09/07 scalable font definitions for TS1/fve.
+)
+LaTeX Font Info:    Font shape `TS1/fve/m/n' will be
+(Font)              scaled to size 8.99994pt on input line 86.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `fve' (encoding: TS1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
+(Font)              scaled to size 8.43994pt on input line 94.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `fvm' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+
+[3{/opt/texlive/texmf-dist/fonts/enc/dvips/ly1/texnansi.enc}]
+LaTeX Font Info:    Font shape `T1/fve/b/n' will be
+(Font)              scaled to size 10.12793pt on input line 124.
+
+
+[4]
+
+[5]
+
+[6]
+
+[7]
+LaTeX Font Info:    Font shape `T1/fvm/m/it' in size <10> not available
+(Font)              Font shape `T1/fvm/m/sl' tried instead on input line 258.
+LaTeX Font Info:    Font shape `T1/fvm/m/sl' will be
+(Font)              scaled to size 8.43994pt on input line 258.
+
+
+[8]
+
+[9]
+
+[10]
+
+[11]
+
+[12]
+
+[13]
+
+[14]
+Overfull \hbox (59.95338pt too wide) in paragraph at lines 478--478
+[]\T1/fvm/m/n/10 gcc -ftree-parallelize-loops=80 -fexpensive-optimizations -mcp
+u=power8 -O3 mm.c[] 
+ []
+
+
+
+[15]
+
+[16]
+Overfull \hbox (17.7434pt too wide) in paragraph at lines 521--523
+\T1/fve/m/sl/10 (-20) If all is prop-erly in-stalled (such as Java), this will 
+com-pile and run a file \T1/fvm/m/n/10 preflow.scala
+ []
+
+
+
+[17]
+LaTeX Font Info:    Font shape `TS1/fve/m/it' in size <10> not available
+(Font)              Font shape `TS1/fve/m/sl' tried instead on input line 563.
+LaTeX Font Info:    Font shape `TS1/fve/m/sl' will be
+(Font)              scaled to size 8.99994pt on input line 563.
+
+Overfull \hbox (247.24521pt too wide) in paragraph at lines 563--564
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (247.24521pt too wide) in paragraph at lines 564--566
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+
+[18]
+Overfull \hbox (4.1727pt too wide) in paragraph at lines 616--617
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+
+[19]
+Overfull \hbox (14.30075pt too wide) in paragraph at lines 666--667
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+
+[20]
+
+[21]
+
+[22]
+
+[23]
+Overfull \hbox (13.98073pt too wide) in paragraph at lines 866--867
+[][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (59.55681pt too wide) in paragraph at lines 867--868
+[][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (34.23676pt too wide) in paragraph at lines 873--874
+[][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+
+[24]
+
+[25]
+LaTeX Info: Symbol \textminus not provided by
+            font family fve in TS1 encoding.
+            Default family used instead on input line 976.
+ (/opt/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
+(RS)
+)
+
+[26{/opt/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+
+[27]
+
+[28] (./labs.aux)
+ ***********
+LaTeX2e <2024-06-01> patch level 2
+L3 programming layer <2024-07-20>
+ ***********
+ )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 160 ({)
+### bottom level 
+Here is how much of TeX's memory you used:
+ 19416 strings out of 473579
+ 358509 string characters out of 5733767
+ 1958957 words of memory out of 5000000
+ 41676 multiletter control sequences out of 15000+600000
+ 633878 words of font info for 283 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 116i,6n,121p,997b,1861s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</opt/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pf
+b></opt/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb></opt/texli
+ve/texmf-dist/fonts/type1/public/bera/fveb8a.pfb></opt/texlive/texmf-dist/fonts
+/type1/public/bera/fver8a.pfb></opt/texlive/texmf-dist/fonts/type1/public/bera/
+fver8a.pfb></opt/texlive/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb></opt/te
+xlive/texmf-dist/fonts/type1/public/bera/fvmro8a.pfb></opt/texlive/texmf-dist/f
+onts/type1/public/mathdesign/mdbch/md-chr7t.pfb></opt/texlive/texmf-dist/fonts/
+type1/public/mathdesign/mdbch/md-chr7y.pfb></opt/texlive/texmf-dist/fonts/type1
+/public/mathdesign/mdbch/md-chri7m.pfb></opt/texlive/texmf-dist/fonts/type1/pub
+lic/cm-super/sfti1000.pfb>
+Output written on labs.pdf (28 pages, 123430 bytes).
+PDF statistics:
+ 156 PDF objects out of 1000 (max. 8388607)
+ 102 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 44045 words of extra memory for PDF output out of 51595 (max. 10000000)
+

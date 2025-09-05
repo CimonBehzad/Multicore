@@ -1,0 +1,2 @@
+The forsete.c is similar to preflow.c except that it has no main and can be used when 
+adapting your program for forsete.cs.lth.se

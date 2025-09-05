@@ -1,0 +1,22 @@
+Start with the C program in Lab 0
+
+On Power you can measure time with a special register that can be accessed using timebase.c and tbr.s
+
+Do as follows:
+
+#include "timebase.h" in your C program.
+
+Initialize in main() with:
+
+	init_timebase();
+
+and measure with:
+
+	begin = timebase_sec();
+	f = preflow();
+	end = timebase_sec();
+
+	printf("t = %lf s\n", end-begin);
+
+where begin and end should have type double.
+

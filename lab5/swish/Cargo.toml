@@ -1,0 +1,9 @@
+[package]
+
+name = "swish"
+version = "0.0.1"
+authors = [ "Forsete" ]
+
+[dependencies]
+text_io = "0.1.8"
+rand = "0.8.4"
