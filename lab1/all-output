@@ -1,8 +1,6 @@
 copying runtime jar...
-[info] welcome to sbt 1.3.13 (Homebrew Java 17.0.16)
-[info] loading project definition from /Users/hugo/school/edan26-multicore/labs/lab1/project
-[info] loading settings for project lab1 from build.sbt ...
-[info] running main 
-11:15:04.741 [Main-akka.actor.default-dispatcher-5] INFO akka.event.slf4j.Slf4jLogger - Slf4jLogger started
-f = 0
-t = 0.14 s
+[info] welcome to sbt 1.3.13 (Ubuntu Java 17.0.16)
+[info] loading settings for project lab1-build-build from metals.sbt ...
+[info] loading project definition from /home/cimon/Documents/år5/MultiEDAN26/Multicore/labs/lab1/project/project
+[info] loading settings for project lab1-build from metals.sbt ...
+[info] loading project definition from /home/cimon/Documents/år5/MultiEDAN26/Multicore/labs/lab1/project
