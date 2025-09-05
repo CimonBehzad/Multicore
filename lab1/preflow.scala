@@ -30,7 +30,7 @@ case class TryPush(amount: Int, myHeight: Int, edge: Edge)
   *
   * @param amount
   */
-case class PushBack(amount: Int)
+case class Ack(amount: Int)
 
 case object Print
 case object Start
@@ -54,6 +54,7 @@ class Node(val index: Int) extends Actor {
         Nil /* adjacency list with edges objects shared with other nodes.	*/
     var debug = true /* to enable printing.	*/
     var nextEdge = 0;
+    var semaphoreCount = 0;
 
     def min(a: Int, b: Int): Int = { if (a < b) a else b }
 
@@ -62,6 +63,7 @@ class Node(val index: Int) extends Actor {
     def other(a: Edge, u: ActorRef): ActorRef = { if (u == a.u) a.v else a.u }
 
     def status: Unit = { if (debug) println(id + " e = " + e + ", h = " + h) }
+    def debugPrint(s: String): Unit = { if (debug) println(id + ": " + s) }
 
     def enter(func: String): Unit = {
         if (debug) { println(id + " enters " + func); status }
@@ -80,36 +82,47 @@ class Node(val index: Int) extends Actor {
     }
 
     def work: Unit = {
-
-
-        if(e == 0){
-            return
-
-        }
-
-        val edge = edges(nextEdge);
-        nextEdge +=1
-        if (nextEdge >= edges.length){ // We have tried to push to everyone but no one worked, we need to raise
-            nextEdge = 0;
-            relabel
-        }
-        var pushCapacity = 0;
-        if(edge.u == self){
-            pushCapacity = edge.c - edge.f
-        }
-        else{
-            pushCapacity = edge.f
-        }
-        if(pushCapacity==0){
-            work // We can not push on this edge, go to next
+        enter("work" + nextEdge)
+        if (sink || source) {
+            exit("work sink/source")
             return;
         }
-        val delta = min(e, pushCapacity)
-        
-        other(edge, self) ! TryPush(delta,h,edge)
-        e -= delta
-        
+        if (semaphoreCount != 0) {
+            return;
+        }
+        var remaining = e
+        while (remaining > 0) {
+            if (nextEdge >= edges.length) { // We have tried to push to everyone but no one worked, we need to raise
+                nextEdge = 0;
+                relabel
+            }
+            if (edges.length == 0) {
+                println("Node " + id + " has no edges!")
+            }
+            val edge = edges(nextEdge);
+            nextEdge += 1
+            var pushCapacity = 0;
+            if (edge.u == self) {
+                pushCapacity = edge.c - edge.f
+            } else {
+                pushCapacity = edge.f
+            }
+            if (pushCapacity == 0) {
+                debugPrint("No push capacity on edge from " + index)
+                work // We can not push on this edge, go to next
+                return;
+            }
+            val delta = min(remaining, pushCapacity)
 
+            semaphoreCount += 1
+            other(edge, self) ! TryPush(delta, h, edge)
+            remaining -= delta
+            debugPrint(
+              "Pushed " + delta + " from " + index + " to " + other(edge, self)
+            )
+
+        }
+        exit("work")
 
     }
 
@@ -120,7 +133,9 @@ class Node(val index: Int) extends Actor {
         case Print => status
 
         case Excess => {
+            enter("Excess")
             sender ! Flow(e)
+            exit("Excess")
             /* send our current excess preflow to actor that asked for it. */
         }
 
@@ -132,41 +147,51 @@ class Node(val index: Int) extends Actor {
         case Control(control: ActorRef) => this.control = control
 
         case Sink => { sink = true }
-        
-        case PushBack(c) => {
-            e -= c
-            work
-            control ! DecreaseActive
-        }
-        
-        case TryPush(amount: Int, myHeight: Int, edge: Edge) => {
-            enter("TryPush")
-            control ! IncreaseActive
 
-            if (h < myHeight) {
-                other(edge,self) ! PushBack(amount)
-            } else {
-                e+=amount;
-                edge.f+= amount;
+        case Ack(c) => {
+            enter("Ack " + c)
+            val wasActive = e > 0
+            e -= c
+            semaphoreCount -= 1
+            if (e == 0 && wasActive) {
+                enter("Notify control of DecreaseActive")
+                control ! DecreaseActive
+            } else if (c == 0) { // GOT A NACK
                 work
             }
+            exit("Ack " + c)
+        }
 
-            
+        case TryPush(amount: Int, myHeight: Int, edge: Edge) => {
+            enter("TryPush")
+
+            if (h > myHeight) { // We higher than who sent to us, we stop sender
+                other(edge, self) ! Ack(0) // NACK
+            } else {
+                if (e == 0 && amount != 0 && !source && !sink) {
+                    control ! IncreaseActive
+                }
+                e += amount
+                edge.f += amount
+                work
+                other(edge, self) ! Ack(amount) // We accept amount
+            }
+
             exit("TryPush")
         }
 
-
-     
-
         case Source(n: Int) => {
+            println("Source started")
             h = n;
             source = true
             for (a <- edges) {
 
                 val v = other(a, self)
                 a.f = a.c
-                e -= a.c
-                v ! PushBack(a.c)
+                println(
+                  "Sending initial push of " + a.c + " from " + index + " to " + v
+                )
+                v ! TryPush(a.c, h, a)
             }
         }
 
@@ -186,9 +211,9 @@ class Preflow extends Actor {
     var n = 0; /* number of vertices in the graph.				*/
     var edges: Array[Edge] = null /* edges in the graph.						*/
     var node: Array[ActorRef] = null /* vertices in the graph.					*/
-    var ret: ActorRef = null /* Actor to send result to.		
-    
-    			*/
+    var ret: ActorRef = null /* Actor to send result to.
+
+     */
     var active = 0;
 
     def receive = {
@@ -205,35 +230,33 @@ class Preflow extends Actor {
         case edges: Array[Edge] => this.edges = edges
 
         case Flow(f: Int) => {
-            
+            println("Got flow " + f);
+
             ret ! f /* somebody (hopefully the sink) told us its current excess preflow. */
 
         }
 
         case Maxflow => {
+            println("Got maxflow")
             ret = sender
 
-            node(
-              t
-            ) ! Excess /* ask sink for its excess preflow (which certainly still is zero). */
         }
 
         case IncreaseActive => {
-            active+=1
+            active += 1
+            println("Increasing: Active nodes: " + active)
 
         }
 
         case DecreaseActive => {
-            active -=1
-        }
-
-        case CheckActive => {
-            if(active == 0){
-                //Done
+            active -= 1
+            println("Decreasing: Active nodes: " + active)
+            if (active == 0) {
+                node(
+                  t
+                ) ! Excess /* ask sink for its excess preflow (which certainly still is zero). */
             }
         }
-
-        
     }
 }
 
