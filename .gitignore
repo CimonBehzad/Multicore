@@ -29,3 +29,6 @@
 **/build
 
 **/out
+**/.bloop
+**/.metals
+lab1/sbt-dist/bin
