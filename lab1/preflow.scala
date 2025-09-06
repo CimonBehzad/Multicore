@@ -52,7 +52,7 @@ class Node(val index: Int) extends Actor {
     var sink: Boolean = false /* true if we are the sink.					*/
     var edges: List[Edge] =
         Nil /* adjacency list with edges objects shared with other nodes.	*/
-    var debug = true /* to enable printing.	*/
+    var debug = false /* to enable printing.	*/
     var nextEdge = 0;
     var semaphoreCount = 0;
 
@@ -200,16 +200,12 @@ class Node(val index: Int) extends Actor {
         }
 
         case Source(n: Int) => {
-            println("Source started")
             h = n;
             source = true
             for (a <- edges) {
 
                 val v = other(a, self)
                 a.f = a.c
-                println(
-                  "Sending initial push of " + a.c + " from " + index + " to " + v
-                )
                 v ! TryPush(a.c, h, a)
             }
         }
@@ -249,27 +245,23 @@ class Preflow extends Actor {
         case edges: Array[Edge] => this.edges = edges
 
         case Flow(f: Int) => {
-            println("Got flow " + f);
 
             ret ! f /* somebody (hopefully the sink) told us its current excess preflow. */
 
         }
 
         case Maxflow => {
-            println("Got maxflow")
             ret = sender
 
         }
 
         case IncreaseActive => {
             active += 1
-            println("Increasing: Active nodes: " + active)
 
         }
 
         case DecreaseActive => {
             active -= 1
-            println("Decreasing: Active nodes: " + active)
             if (active == 0) {
                 node(
                   t
@@ -280,7 +272,7 @@ class Preflow extends Actor {
 }
 
 object main extends App {
-    implicit val t = Timeout(4 seconds);
+    implicit val t = Timeout(60 seconds);
 
     val begin = System.currentTimeMillis()
     val system = ActorSystem("Main")
@@ -319,13 +311,13 @@ object main extends App {
         node(v) ! edges(i)
     }
 
-    node(0) ! Source(n)
-    node.last ! Sink
-
     control ! node
     control ! edges
-
     val flow = control ? Maxflow
+
+    node.last ! Sink
+    node(0) ! Source(n) // Stats algo
+
     val f = Await.result(flow, t.duration)
 
     println("f = " + f)
@@ -336,11 +328,5 @@ object main extends App {
     val end = System.currentTimeMillis()
 
     println("t = " + (end - begin) / 1000.0 + " s")
-    println("Final state:")
-    for (edge <- edges) {
-        println(
-          "Edge from " + edge.source.path.name + " to " + edge.target.path.name + " with capacity " + edge.c + " has flow " + edge.f
-        )
-    }
 
 }
