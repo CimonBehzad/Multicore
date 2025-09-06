@@ -172,7 +172,11 @@ class Node(val index: Int) extends Actor {
                     control ! IncreaseActive
                 }
                 e += amount
-                edge.f += amount
+                if (edge.u == self)
+                    edge.f += amount
+                else {
+                    edge.f -= amount
+                }
                 work
                 other(edge, self) ! Ack(amount) // We accept amount
             }
