@@ -112,7 +112,7 @@ class Node(val index: Int) extends Actor {
             if (edge.source == self) {
                 pushCapacity = edge.c - edge.f
             } else {
-                pushCapacity = edge.f // We push back
+                pushCapacity = edge.f + edge.c // We push back
             }
             if (pushCapacity == 0) {
                 debugPrint(
@@ -169,7 +169,6 @@ class Node(val index: Int) extends Actor {
               e == 0 && wasActive && semaphoreCount == 0 && !source && !sink
             ) {
                 enter("Notify control of DecreaseActive")
-
                 control ! DecreaseActive
             } else if (semaphoreCount == 0) {
                 work
