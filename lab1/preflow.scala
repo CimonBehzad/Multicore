@@ -39,7 +39,7 @@ case object Maxflow
 case object Sink
 case object Hello
 
-class Edge(var u: ActorRef, var v: ActorRef, var c: Int) {
+class Edge(var source: ActorRef, var target: ActorRef, var c: Int) {
     var f = 0
 }
 
@@ -60,9 +60,16 @@ class Node(val index: Int) extends Actor {
 
     def id: String = "@" + index;
 
-    def other(a: Edge, u: ActorRef): ActorRef = { if (u == a.u) a.v else a.u }
+    def other(a: Edge, u: ActorRef): ActorRef = {
+        if (u == a.source) a.target else a.source
+    }
 
-    def status: Unit = { if (debug) println(id + " e = " + e + ", h = " + h + " Semaphore count: " + semaphoreCount + " Nextedge: "+ nextEdge ) }
+    def status: Unit = {
+        if (debug)
+            println(
+              id + " e = " + e + ", h = " + h + " Semaphore count: " + semaphoreCount + " Nextedge: " + nextEdge
+            )
+    }
     def debugPrint(s: String): Unit = { if (debug) println(id + ": " + s) }
 
     def enter(func: String): Unit = {
@@ -102,13 +109,15 @@ class Node(val index: Int) extends Actor {
             val edge = edges(nextEdge);
             nextEdge += 1
             var pushCapacity = 0;
-            if (edge.u == self) {
+            if (edge.source == self) {
                 pushCapacity = edge.c - edge.f
             } else {
-                pushCapacity = edge.f
+                pushCapacity = edge.f // We push back
             }
             if (pushCapacity == 0) {
-                debugPrint("No push capacity on edge from " + index)
+                debugPrint(
+                  "No push capacity on edge from " + index + " on edge index " + (nextEdge - 1) + " Capacity: " + edge.c + " Flow: " + edge.f
+                )
                 work // We can not push on this edge, go to next
                 return;
             }
@@ -118,7 +127,10 @@ class Node(val index: Int) extends Actor {
             other(edge, self) ! TryPush(delta, h, edge)
             remaining -= delta
             debugPrint(
-              "Pushed " + delta + " from " + index + " to " + other(edge, self) + " Edge Height: " + h + " Capacity: " + edge.c + " Flow: " + edge.f
+              "Pushed " + delta + " from " + index + " to " + other(
+                edge,
+                self
+              ) + " Edge Height: " + h + " Capacity: " + edge.c + " Flow: " + edge.f
             )
 
         }
@@ -153,11 +165,13 @@ class Node(val index: Int) extends Actor {
             val wasActive = e > 0
             e -= c
             semaphoreCount -= 1
-            if (e == 0 && wasActive) {
+            if (
+              e == 0 && wasActive && semaphoreCount == 0 && !source && !sink
+            ) {
                 enter("Notify control of DecreaseActive")
 
                 control ! DecreaseActive
-            } else if (semaphoreCount == 0) { 
+            } else if (semaphoreCount == 0) {
                 work
             }
             exit("Ack " + c)
@@ -166,16 +180,15 @@ class Node(val index: Int) extends Actor {
         case TryPush(amount: Int, senderHeight: Int, edge: Edge) => {
             enter("Gets TryPushed" + " " + amount + " " + senderHeight)
 
-
             if (h >= senderHeight) { // We higher than who sent to us, we stop sender
-            enter("Rejected" + " " + amount)
+                enter("Rejected" + " " + amount)
                 other(edge, self) ! Ack(0) // NACK
             } else {
                 if (e == 0 && amount != 0 && !source && !sink) {
                     control ! IncreaseActive
                 }
                 e += amount
-                if (edge.u == self)
+                if (edge.target == self)
                     edge.f += amount
                 else {
                     edge.f -= amount
@@ -324,4 +337,11 @@ object main extends App {
     val end = System.currentTimeMillis()
 
     println("t = " + (end - begin) / 1000.0 + " s")
+    println("Final state:")
+    for (edge <- edges) {
+        println(
+          "Edge from " + edge.source.path.name + " to " + edge.target.path.name + " with capacity " + edge.c + " has flow " + edge.f
+        )
+    }
+
 }
