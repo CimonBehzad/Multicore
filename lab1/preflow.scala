@@ -240,6 +240,8 @@ class Preflow extends Actor {
             t = n - 1
             for (u <- node)
                 u ! Control(self)
+            node.last ! Sink
+            node(0) ! Source(n) // Starts algo
         }
 
         case edges: Array[Edge] => this.edges = edges
@@ -311,12 +313,9 @@ object main extends App {
         node(v) ! edges(i)
     }
 
-    control ! node
     control ! edges
+    control ! node
     val flow = control ? Maxflow
-
-    node.last ! Sink
-    node(0) ! Source(n) // Stats algo
 
     val f = Await.result(flow, t.duration)
 
