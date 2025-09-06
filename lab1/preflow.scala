@@ -62,7 +62,7 @@ class Node(val index: Int) extends Actor {
 
     def other(a: Edge, u: ActorRef): ActorRef = { if (u == a.u) a.v else a.u }
 
-    def status: Unit = { if (debug) println(id + " e = " + e + ", h = " + h) }
+    def status: Unit = { if (debug) println(id + " e = " + e + ", h = " + h + " Semaphore count: " + semaphoreCount + " Nextedge: "+ nextEdge ) }
     def debugPrint(s: String): Unit = { if (debug) println(id + ": " + s) }
 
     def enter(func: String): Unit = {
@@ -82,7 +82,7 @@ class Node(val index: Int) extends Actor {
     }
 
     def work: Unit = {
-        enter("work" + nextEdge)
+        enter("work" + " " + "nextedge: " + nextEdge)
         if (sink || source) {
             exit("work sink/source")
             return;
@@ -118,7 +118,7 @@ class Node(val index: Int) extends Actor {
             other(edge, self) ! TryPush(delta, h, edge)
             remaining -= delta
             debugPrint(
-              "Pushed " + delta + " from " + index + " to " + other(edge, self)
+              "Pushed " + delta + " from " + index + " to " + other(edge, self) + " Edge Height: " + h + " Capacity: " + edge.c + " Flow: " + edge.f
             )
 
         }
@@ -155,17 +155,20 @@ class Node(val index: Int) extends Actor {
             semaphoreCount -= 1
             if (e == 0 && wasActive) {
                 enter("Notify control of DecreaseActive")
+
                 control ! DecreaseActive
-            } else if (c == 0) { // GOT A NACK
+            } else if (semaphoreCount == 0) { 
                 work
             }
             exit("Ack " + c)
         }
 
-        case TryPush(amount: Int, myHeight: Int, edge: Edge) => {
-            enter("TryPush")
+        case TryPush(amount: Int, senderHeight: Int, edge: Edge) => {
+            enter("Gets TryPushed" + " " + amount + " " + senderHeight)
 
-            if (h > myHeight) { // We higher than who sent to us, we stop sender
+
+            if (h >= senderHeight) { // We higher than who sent to us, we stop sender
+            enter("Rejected" + " " + amount)
                 other(edge, self) ! Ack(0) // NACK
             } else {
                 if (e == 0 && amount != 0 && !source && !sink) {
@@ -173,11 +176,12 @@ class Node(val index: Int) extends Actor {
                 }
                 e += amount
                 edge.f += amount
+                enter("Accepted" + " " + amount)
                 work
                 other(edge, self) ! Ack(amount) // We accept amount
             }
 
-            exit("TryPush")
+            exit("Done Getting TryPushed" + " " + amount)
         }
 
         case Source(n: Int) => {
